@@ -1,0 +1,15 @@
+<div class="login-wrapper">
+  <h2>Iniciar Sesión</h2>
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div>
+      <label>Email</label>
+      <input type="email" formControlName="email" />
+    </div>
+    <div>
+      <label>Contraseña</label>
+      <input type="password" formControlName="password" />
+    </div>
+    <button type="submit" [disabled]="loading || form.invalid">{{ loading ? 'Entrando...' : 'Entrar' }}</button>
+  </form>
+  <p class="error" *ngIf="errorMsg">{{ errorMsg }}</p>
+</div>

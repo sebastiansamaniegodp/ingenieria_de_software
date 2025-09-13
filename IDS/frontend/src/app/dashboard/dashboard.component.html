@@ -1,0 +1,10 @@
+<div class="dashboard">
+  <h2>Dashboard</h2>
+  <div *ngIf="user; else guest">
+    <p>Bienvenido {{ user.first_name || user.email }}</p>
+    <button id="logoutBtn" (click)="logout()">Logout</button>
+  </div>
+  <ng-template #guest>
+    <p>No autenticado.</p>
+  </ng-template>
+</div>

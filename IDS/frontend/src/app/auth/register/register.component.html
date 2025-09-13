@@ -1,0 +1,32 @@
+<div class="register-wrapper">
+  <h2>Registro de Usuario</h2>
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div>
+      <label>Email</label>
+      <input type="email" formControlName="email" />
+      <small *ngIf="form.controls.email.touched && form.controls.email.invalid">Email inválido</small>
+    </div>
+    <div>
+      <label>Contraseña</label>
+      <input type="password" formControlName="password" />
+      <small *ngIf="form.controls.password.touched && form.controls.password.invalid">Mínimo 8 caracteres</small>
+    </div>
+    <div>
+      <label>Nombre</label>
+      <input formControlName="first_name" />
+    </div>
+    <div>
+      <label>Apellidos</label>
+      <input formControlName="last_name" />
+    </div>
+    <div>
+      <label>Rol</label>
+      <select formControlName="role">
+        <option *ngFor="let r of roles" [value]="r.value">{{ r.label }}</option>
+      </select>
+    </div>
+    <button type="submit" [disabled]="loading || form.invalid">{{ loading ? 'Registrando...' : 'Registrar' }}</button>
+  </form>
+  <p class="success" *ngIf="successMsg">{{ successMsg }}</p>
+  <p class="error" *ngIf="errorMsg">{{ errorMsg }}</p>
+</div>
