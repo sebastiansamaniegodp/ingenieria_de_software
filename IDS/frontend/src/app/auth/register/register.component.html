@@ -1,32 +1,142 @@
-<div class="register-wrapper">
-  <h2>Registro de Usuario</h2>
-  <form [formGroup]="form" (ngSubmit)="submit()">
-    <div>
-      <label>Email</label>
-      <input type="email" formControlName="email" />
-      <small *ngIf="form.controls.email.touched && form.controls.email.invalid">Email inválido</small>
+<div class="register-container">
+  <div class="register-card">
+    <!-- Header con icono -->
+    <div class="register-header">
+      <div class="logo-circle">
+        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+          <circle cx="8.5" cy="7" r="4"></circle>
+          <line x1="20" y1="8" x2="20" y2="14"></line>
+          <line x1="23" y1="11" x2="17" y2="11"></line>
+        </svg>
+      </div>
+      <h2>Registro de Usuario</h2>
+      <p class="subtitle">Sistema de Gestión Hospitalaria</p>
     </div>
-    <div>
-      <label>Contraseña</label>
-      <input type="password" formControlName="password" />
-      <small *ngIf="form.controls.password.touched && form.controls.password.invalid">Mínimo 8 caracteres</small>
+
+    <!-- Formulario -->
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <div class="form-group">
+        <label for="email">Correo Electrónico *</label>
+        <div class="input-wrapper">
+          <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+            <polyline points="22,6 12,13 2,6"></polyline>
+          </svg>
+          <input
+            type="email"
+            id="email"
+            formControlName="email"
+            placeholder="correo@ejemplo.com"
+            [class.error-input]="form.controls.email.touched && form.controls.email.invalid"
+          />
+        </div>
+        <small class="field-error" *ngIf="form.controls.email.touched && form.controls.email.invalid">
+          Por favor ingrese un correo válido
+        </small>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Contraseña *</label>
+        <div class="input-wrapper">
+          <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+          </svg>
+          <input
+            type="password"
+            id="password"
+            formControlName="password"
+            placeholder="Mínimo 8 caracteres"
+            [class.error-input]="form.controls.password.touched && form.controls.password.invalid"
+          />
+        </div>
+        <small class="field-error" *ngIf="form.controls.password.touched && form.controls.password.invalid">
+          La contraseña debe tener al menos 8 caracteres
+        </small>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="first_name">Nombre</label>
+          <div class="input-wrapper">
+            <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <input
+              type="text"
+              id="first_name"
+              formControlName="first_name"
+              placeholder="Juan"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="last_name">Apellidos</label>
+          <div class="input-wrapper">
+            <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <input
+              type="text"
+              id="last_name"
+              formControlName="last_name"
+              placeholder="Pérez"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="role">Rol *</label>
+        <div class="input-wrapper">
+          <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+          </svg>
+          <select id="role" formControlName="role">
+            <option *ngFor="let r of roles" [value]="r.value">{{ r.label }}</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Mensaje de éxito -->
+      <div class="success-message" *ngIf="successMsg">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+          <polyline points="22 4 12 14.01 9 11.01"></polyline>
+        </svg>
+        <span>{{ successMsg }}</span>
+      </div>
+
+      <!-- Mensaje de error -->
+      <div class="error-message" *ngIf="errorMsg">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+        <span>{{ errorMsg }}</span>
+      </div>
+
+      <!-- Botón de submit -->
+      <button type="submit" class="btn-primary" [disabled]="loading || form.invalid">
+        <span *ngIf="!loading">Crear Cuenta</span>
+        <span *ngIf="loading" class="loading-text">
+          <span class="spinner"></span>
+          Registrando...
+        </span>
+      </button>
+    </form>
+
+    <!-- Footer con link a login -->
+    <div class="register-footer">
+      <p>¿Ya tienes una cuenta? <a [routerLink]="['/login']" class="link">Inicia sesión aquí</a></p>
     </div>
-    <div>
-      <label>Nombre</label>
-      <input formControlName="first_name" />
-    </div>
-    <div>
-      <label>Apellidos</label>
-      <input formControlName="last_name" />
-    </div>
-    <div>
-      <label>Rol</label>
-      <select formControlName="role">
-        <option *ngFor="let r of roles" [value]="r.value">{{ r.label }}</option>
-      </select>
-    </div>
-    <button type="submit" [disabled]="loading || form.invalid">{{ loading ? 'Registrando...' : 'Registrar' }}</button>
-  </form>
-  <p class="success" *ngIf="successMsg">{{ successMsg }}</p>
-  <p class="error" *ngIf="errorMsg">{{ errorMsg }}</p>
+  </div>
 </div>

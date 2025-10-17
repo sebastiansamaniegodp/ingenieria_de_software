@@ -1,15 +1,81 @@
-<div class="login-wrapper">
-  <h2>Iniciar Sesión</h2>
-  <form [formGroup]="form" (ngSubmit)="submit()">
-    <div>
-      <label>Email</label>
-      <input type="email" formControlName="email" />
+<div class="login-container">
+  <div class="login-card">
+    <!-- Header con icono -->
+    <div class="login-header">
+      <div class="logo-circle">
+        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+        </svg>
+      </div>
+      <h2>Iniciar Sesión</h2>
+      <p class="subtitle">Sistema de Gestión Hospitalaria</p>
     </div>
-    <div>
-      <label>Contraseña</label>
-      <input type="password" formControlName="password" />
+
+    <!-- Formulario -->
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <div class="form-group">
+        <label for="email">Correo Electrónico</label>
+        <div class="input-wrapper">
+          <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+            <polyline points="22,6 12,13 2,6"></polyline>
+          </svg>
+          <input
+            type="email"
+            id="email"
+            formControlName="email"
+            placeholder="correo@ejemplo.com"
+            [class.error-input]="form.controls.email.touched && form.controls.email.invalid"
+          />
+        </div>
+        <small class="field-error" *ngIf="form.controls.email.touched && form.controls.email.invalid">
+          Por favor ingrese un correo válido
+        </small>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Contraseña</label>
+        <div class="input-wrapper">
+          <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+          </svg>
+          <input
+            type="password"
+            id="password"
+            formControlName="password"
+            placeholder="••••••••"
+            [class.error-input]="form.controls.password.touched && form.controls.password.invalid"
+          />
+        </div>
+        <small class="field-error" *ngIf="form.controls.password.touched && form.controls.password.invalid">
+          La contraseña es requerida
+        </small>
+      </div>
+
+      <!-- Mensaje de error general -->
+      <div class="error-message" *ngIf="errorMsg">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+        <span>{{ errorMsg }}</span>
+      </div>
+
+      <!-- Botón de submit -->
+      <button type="submit" class="btn-primary" [disabled]="loading || form.invalid">
+        <span *ngIf="!loading">Iniciar Sesión</span>
+        <span *ngIf="loading" class="loading-text">
+          <span class="spinner"></span>
+          Entrando...
+        </span>
+      </button>
+    </form>
+
+    <!-- Footer con link a registro -->
+    <div class="login-footer">
+      <p>¿No tienes una cuenta? <a [routerLink]="['/register']" class="link">Regístrate aquí</a></p>
     </div>
-    <button type="submit" [disabled]="loading || form.invalid">{{ loading ? 'Entrando...' : 'Entrar' }}</button>
-  </form>
-  <p class="error" *ngIf="errorMsg">{{ errorMsg }}</p>
+  </div>
 </div>
