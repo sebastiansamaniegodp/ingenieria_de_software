@@ -3,3 +3,4 @@
 nul
 CLAUDE.md
 *.pyc
+venv/
