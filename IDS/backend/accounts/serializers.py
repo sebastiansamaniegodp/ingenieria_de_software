@@ -10,6 +10,7 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         read_only_fields = ["id"]
 
     def validate_email(self, value):
+        value = value.lower().strip()
         if CustomUser.objects.filter(email__iexact=value).exists():
             raise serializers.ValidationError("El email ya está registrado.")
         return value

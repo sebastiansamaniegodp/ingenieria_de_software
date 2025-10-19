@@ -7,7 +7,7 @@ class UserManager(BaseUserManager):
 	def create_user(self, email, password=None, role='PATIENT', **extra_fields):
 		if not email:
 			raise ValueError('El email es obligatorio')
-		email = self.normalize_email(email)
+		email = self.normalize_email(email).lower()
 		user = self.model(email=email, role=role, **extra_fields)
 		user.set_password(password)
 		user.save(using=self._db)
