@@ -1,0 +1,163 @@
+<div class="admin-dashboard">
+  <div class="dashboard-header">
+    <h2>Panel de Administración</h2>
+    <p class="subtitle">Supervisa las operaciones del hospital</p>
+  </div>
+
+  <!-- Main Stats Grid -->
+  <div class="main-stats" *ngIf="!loadingStats && stats">
+    <div class="stat-card patients">
+      <div class="stat-header">
+        <span class="stat-icon">👥</span>
+        <h3>Pacientes</h3>
+      </div>
+      <p class="stat-value">{{ stats.total_patients || 0 }}</p>
+      <p class="stat-label">Total en el sistema</p>
+    </div>
+
+    <div class="stat-card appointments">
+      <div class="stat-header">
+        <span class="stat-icon">📅</span>
+        <h3>Citas</h3>
+      </div>
+      <p class="stat-value">{{ stats.appointments_today || 0 }}</p>
+      <p class="stat-label">Programadas hoy</p>
+    </div>
+
+    <div class="stat-card staff">
+      <div class="stat-header">
+        <span class="stat-icon">👨‍⚕️</span>
+        <h3>Personal</h3>
+      </div>
+      <p class="stat-value">{{ stats.active_staff || 0 }}</p>
+      <p class="stat-label">Activo en turno</p>
+    </div>
+
+    <div class="stat-card occupancy">
+      <div class="stat-header">
+        <span class="stat-icon">🏥</span>
+        <h3>Ocupación</h3>
+      </div>
+      <p class="stat-value">{{ stats.bed_occupancy || 0 }}%</p>
+      <p class="stat-label">Camas ocupadas</p>
+    </div>
+  </div>
+
+  <!-- Secondary Stats -->
+  <div class="secondary-stats" *ngIf="!loadingStats && stats">
+    <div class="mini-stat">
+      <div class="mini-stat-content">
+        <span class="mini-icon">📋</span>
+        <div>
+          <p class="mini-value">{{ stats.pending_tasks || 0 }}</p>
+          <p class="mini-label">Tareas Pendientes</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="mini-stat">
+      <div class="mini-stat-content">
+        <span class="mini-icon">🔔</span>
+        <div>
+          <p class="mini-value">{{ stats.unread_notifications || 0 }}</p>
+          <p class="mini-label">Notificaciones</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="mini-stat">
+      <div class="mini-stat-content">
+        <span class="mini-icon">📊</span>
+        <div>
+          <p class="mini-value">{{ stats.total_appointments || 0 }}</p>
+          <p class="mini-label">Citas Totales</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dashboard-content">
+    <!-- Today's Appointments -->
+    <section class="dashboard-section">
+      <div class="section-header">
+        <h3>Citas de Hoy</h3>
+        <span class="badge">{{ recentAppointments.length }}</span>
+      </div>
+      <app-data-table
+        [columns]="appointmentColumns"
+        [data]="recentAppointments"
+        [loading]="loadingAppointments"
+        (rowClick)="onAppointmentClick($event)"
+        emptyMessage="No hay citas programadas para hoy">
+      </app-data-table>
+    </section>
+
+    <!-- System Tasks -->
+    <section class="dashboard-section">
+      <div class="section-header">
+        <h3>Tareas del Sistema</h3>
+        <span class="badge badge-warning">{{ systemTasks.length }}</span>
+      </div>
+      <app-data-table
+        [columns]="taskColumns"
+        [data]="systemTasks"
+        [loading]="loadingTasks"
+        (rowClick)="onTaskClick($event)"
+        emptyMessage="No hay tareas pendientes">
+      </app-data-table>
+    </section>
+
+    <!-- Recent Patients -->
+    <section class="dashboard-section">
+      <div class="section-header">
+        <h3>Pacientes Recientes</h3>
+        <span class="badge">{{ recentPatients.length }}</span>
+      </div>
+      <app-data-table
+        [columns]="patientColumns"
+        [data]="recentPatients"
+        [loading]="loadingPatients"
+        (rowClick)="onPatientClick($event)"
+        emptyMessage="No hay pacientes registrados">
+      </app-data-table>
+    </section>
+
+    <!-- Management Actions -->
+    <section class="management-actions">
+      <h3>Gestión del Sistema</h3>
+      <div class="actions-grid">
+        <button class="management-btn users">
+          <span class="btn-icon">👤</span>
+          <div class="btn-content">
+            <h4>Usuarios</h4>
+            <p>Gestionar personal y permisos</p>
+          </div>
+        </button>
+
+        <button class="management-btn reports">
+          <span class="btn-icon">📊</span>
+          <div class="btn-content">
+            <h4>Reportes</h4>
+            <p>Ver estadísticas y métricas</p>
+          </div>
+        </button>
+
+        <button class="management-btn settings">
+          <span class="btn-icon">⚙️</span>
+          <div class="btn-content">
+            <h4>Configuración</h4>
+            <p>Ajustes del sistema</p>
+          </div>
+        </button>
+
+        <button class="management-btn backup">
+          <span class="btn-icon">💾</span>
+          <div class="btn-content">
+            <h4>Respaldos</h4>
+            <p>Gestionar backups</p>
+          </div>
+        </button>
+      </div>
+    </section>
+  </div>
+</div>

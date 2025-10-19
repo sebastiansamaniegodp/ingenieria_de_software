@@ -1,0 +1,68 @@
+<div class="patient-dashboard">
+  <div class="dashboard-header">
+    <h2>Mi Panel de Paciente</h2>
+    <p class="subtitle">Consulta tus citas y resultados médicos</p>
+  </div>
+
+  <div class="dashboard-content">
+    <!-- Appointments Section -->
+    <section class="dashboard-section">
+      <div class="section-header">
+        <h3>Mis Próximas Citas</h3>
+        <span class="badge">{{ appointments.length }}</span>
+      </div>
+      <app-data-table
+        [columns]="appointmentColumns"
+        [data]="appointments"
+        [loading]="loadingAppointments"
+        (rowClick)="onAppointmentClick($event)"
+        emptyMessage="No tienes citas programadas">
+      </app-data-table>
+    </section>
+
+    <!-- Medical Records Section -->
+    <section class="dashboard-section">
+      <div class="section-header">
+        <h3>Mis Resultados y Registros Médicos</h3>
+        <span class="badge">{{ medicalRecords.length }}</span>
+      </div>
+      <app-data-table
+        [columns]="recordColumns"
+        [data]="medicalRecords"
+        [loading]="loadingRecords"
+        (rowClick)="onRecordClick($event)"
+        emptyMessage="No hay registros médicos disponibles">
+      </app-data-table>
+    </section>
+
+    <!-- Quick Info Cards -->
+    <div class="info-cards">
+      <div class="info-card">
+        <div class="card-icon">📅</div>
+        <div class="card-content">
+          <h4>Próxima Cita</h4>
+          <p *ngIf="appointments.length > 0">
+            {{ appointments[0].date }} - {{ appointments[0].time }}
+          </p>
+          <p *ngIf="appointments.length === 0" class="no-data">Sin citas programadas</p>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="card-icon">📋</div>
+        <div class="card-content">
+          <h4>Registros Totales</h4>
+          <p class="card-number">{{ medicalRecords.length }}</p>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="card-icon">💊</div>
+        <div class="card-content">
+          <h4>Recetas Activas</h4>
+          <p class="card-number">{{ activePrescriptionsCount }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

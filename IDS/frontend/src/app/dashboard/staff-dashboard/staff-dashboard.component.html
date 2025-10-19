@@ -1,0 +1,129 @@
+<div class="staff-dashboard">
+  <div class="dashboard-header">
+    <h2>Panel de Personal</h2>
+    <p class="subtitle">Gestiona tus tareas y notificaciones</p>
+  </div>
+
+  <!-- Overview Cards -->
+  <div class="overview-cards">
+    <div class="overview-card tasks">
+      <div class="card-content">
+        <div class="card-icon">📋</div>
+        <div class="card-info">
+          <h4>Tareas</h4>
+          <p class="card-number">{{ myTasks.length }}</p>
+          <p class="card-detail">{{ pendingTasks }} pendientes</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="overview-card notifications">
+      <div class="card-content">
+        <div class="card-icon">🔔</div>
+        <div class="card-info">
+          <h4>Notificaciones</h4>
+          <p class="card-number">{{ notifications.length }}</p>
+          <p class="card-detail">{{ unreadNotifications }} sin leer</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="overview-card appointments">
+      <div class="card-content">
+        <div class="card-icon">📅</div>
+        <div class="card-info">
+          <h4>Citas Hoy</h4>
+          <p class="card-number">{{ todayAppointments.length }}</p>
+          <p class="card-detail">Programadas</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dashboard-content">
+    <!-- My Tasks Section -->
+    <section class="dashboard-section priority">
+      <div class="section-header">
+        <h3>Mis Tareas</h3>
+        <span class="badge badge-primary">{{ myTasks.length }}</span>
+      </div>
+      <app-data-table
+        [columns]="taskColumns"
+        [data]="myTasks"
+        [loading]="loadingTasks"
+        (rowClick)="onTaskClick($event)"
+        emptyMessage="No tienes tareas asignadas">
+      </app-data-table>
+    </section>
+
+    <!-- Notifications Section -->
+    <section class="dashboard-section">
+      <div class="section-header">
+        <h3>Notificaciones</h3>
+        <span class="badge" [class.badge-alert]="unreadNotifications > 0">
+          {{ notifications.length }}
+        </span>
+      </div>
+      <app-data-table
+        [columns]="notificationColumns"
+        [data]="notifications"
+        [loading]="loadingNotifications"
+        (rowClick)="onNotificationClick($event)"
+        emptyMessage="No hay notificaciones">
+      </app-data-table>
+    </section>
+
+    <!-- Today's Schedule -->
+    <section class="dashboard-section">
+      <div class="section-header">
+        <h3>Agenda del Día</h3>
+        <span class="badge">{{ todayAppointments.length }}</span>
+      </div>
+      <app-data-table
+        [columns]="appointmentColumns"
+        [data]="todayAppointments"
+        [loading]="loadingAppointments"
+        (rowClick)="onAppointmentClick($event)"
+        emptyMessage="No hay citas programadas para hoy">
+      </app-data-table>
+    </section>
+
+    <!-- Quick Links -->
+    <section class="quick-links">
+      <h3>Enlaces Rápidos</h3>
+      <div class="links-grid">
+        <a href="#" class="link-card">
+          <span class="link-icon">📄</span>
+          <div class="link-info">
+            <h4>Documentación</h4>
+            <p>Manuales y guías</p>
+          </div>
+        </a>
+
+        <a href="#" class="link-card">
+          <span class="link-icon">📞</span>
+          <div class="link-info">
+            <h4>Directorio</h4>
+            <p>Contactos internos</p>
+          </div>
+        </a>
+
+        <a href="#" class="link-card">
+          <span class="link-icon">🗓️</span>
+          <div class="link-info">
+            <h4>Calendario</h4>
+            <p>Ver eventos</p>
+          </div>
+        </a>
+
+        <a href="#" class="link-card">
+          <span class="link-icon">💬</span>
+          <div class="link-info">
+            <h4>Soporte</h4>
+            <p>Ayuda y contacto</p>
+          </div>
+        </a>
+      </div>
+    </section>
+  </div>
+</div>

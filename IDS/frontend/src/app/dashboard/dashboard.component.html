@@ -1,10 +1,55 @@
-<div class="dashboard">
-  <h2>Dashboard</h2>
-  <div *ngIf="user; else guest">
-    <p>Bienvenido {{ user.first_name || user.email }}</p>
-    <button id="logoutBtn" (click)="logout()">Logout</button>
-  </div>
+<div class="dashboard-container">
+  <!-- Header Bar -->
+  <header class="dashboard-header">
+    <div class="header-content">
+      <div class="header-left">
+        <h1 class="hospital-name">Hospital System</h1>
+        <span class="role-badge">{{ roleLabel }}</span>
+      </div>
+      <div class="header-right">
+        <div class="user-info">
+          <span class="user-icon">👤</span>
+          <div class="user-details">
+            <span class="user-name">{{ userName }}</span>
+            <span class="user-email">{{ user?.email }}</span>
+          </div>
+        </div>
+        <button class="logout-btn" (click)="logout()" title="Cerrar sesión">
+          <span>Cerrar Sesión</span>
+          <span class="logout-icon">🚪</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Dashboard Content by Role -->
+  <main class="dashboard-main" *ngIf="user; else guest">
+    <app-patient-dashboard *ngIf="userRole === 'PATIENT'"></app-patient-dashboard>
+    <app-doctor-dashboard *ngIf="userRole === 'DOCTOR'"></app-doctor-dashboard>
+    <app-nurse-dashboard *ngIf="userRole === 'NURSE'"></app-nurse-dashboard>
+    <app-admin-dashboard *ngIf="userRole === 'ADMIN'"></app-admin-dashboard>
+    <app-staff-dashboard *ngIf="userRole === 'STAFF'"></app-staff-dashboard>
+
+    <!-- Fallback for unknown roles -->
+    <div *ngIf="!['PATIENT', 'DOCTOR', 'NURSE', 'ADMIN', 'STAFF'].includes(userRole)" class="unknown-role">
+      <div class="unknown-role-content">
+        <span class="icon">⚠️</span>
+        <h2>Rol No Reconocido</h2>
+        <p>El rol "{{ userRole }}" no tiene un dashboard asignado.</p>
+        <p>Por favor, contacta al administrador del sistema.</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Guest Template -->
   <ng-template #guest>
-    <p>No autenticado.</p>
+    <div class="guest-message">
+      <span class="guest-icon">🔒</span>
+      <h2>No Autenticado</h2>
+      <p>Por favor, inicia sesión para acceder al dashboard.</p>
+      <button class="login-redirect-btn" (click)="router.navigate(['/login'])">
+        Ir a Login
+      </button>
+    </div>
   </ng-template>
 </div>

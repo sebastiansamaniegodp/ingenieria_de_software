@@ -1,0 +1,96 @@
+<div class="doctor-dashboard">
+  <div class="dashboard-header">
+    <h2>Panel del Doctor</h2>
+    <p class="subtitle">Gestiona tus consultas y pacientes</p>
+  </div>
+
+  <!-- Stats Cards -->
+  <div class="stats-grid" *ngIf="!loadingStats && stats">
+    <div class="stat-card">
+      <div class="stat-icon">📅</div>
+      <div class="stat-content">
+        <h4>Citas Hoy</h4>
+        <p class="stat-number">{{ stats.appointments_today || 0 }}</p>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon">👥</div>
+      <div class="stat-content">
+        <h4>Total Pacientes</h4>
+        <p class="stat-number">{{ stats.total_patients || 0 }}</p>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon">📋</div>
+      <div class="stat-content">
+        <h4>Citas Totales</h4>
+        <p class="stat-number">{{ stats.total_appointments || 0 }}</p>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon">🔔</div>
+      <div class="stat-content">
+        <h4>Notificaciones</h4>
+        <p class="stat-number">{{ stats.unread_notifications || 0 }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="dashboard-content">
+    <!-- Today's Appointments -->
+    <section class="dashboard-section priority">
+      <div class="section-header">
+        <h3>Agenda de Hoy</h3>
+        <span class="badge badge-primary">{{ todayAppointments.length }}</span>
+      </div>
+      <app-data-table
+        [columns]="appointmentColumns"
+        [data]="todayAppointments"
+        [loading]="loadingAppointments"
+        (rowClick)="onAppointmentClick($event)"
+        emptyMessage="No hay citas programadas para hoy">
+      </app-data-table>
+    </section>
+
+    <!-- Recent Patients -->
+    <section class="dashboard-section">
+      <div class="section-header">
+        <h3>Pacientes Recientes</h3>
+        <span class="badge">{{ recentPatients.length }}</span>
+      </div>
+      <app-data-table
+        [columns]="patientColumns"
+        [data]="recentPatients"
+        [loading]="loadingPatients"
+        (rowClick)="onPatientClick($event)"
+        emptyMessage="No hay pacientes recientes">
+      </app-data-table>
+    </section>
+
+    <!-- Quick Actions -->
+    <section class="quick-actions">
+      <h3>Acciones Rápidas</h3>
+      <div class="actions-grid">
+        <button class="action-button">
+          <span class="action-icon">➕</span>
+          <span class="action-label">Nueva Consulta</span>
+        </button>
+        <button class="action-button">
+          <span class="action-icon">🔍</span>
+          <span class="action-label">Buscar Paciente</span>
+        </button>
+        <button class="action-button">
+          <span class="action-icon">📝</span>
+          <span class="action-label">Nueva Receta</span>
+        </button>
+        <button class="action-button">
+          <span class="action-icon">📊</span>
+          <span class="action-label">Ver Estadísticas</span>
+        </button>
+      </div>
+    </section>
+  </div>
+</div>

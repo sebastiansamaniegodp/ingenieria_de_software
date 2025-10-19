@@ -1,0 +1,178 @@
+.patient-dashboard {
+  padding: 1.5rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.dashboard-header {
+  margin-bottom: 2rem;
+}
+
+.dashboard-header h2 {
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+  font-size: 1.75rem;
+}
+
+.subtitle {
+  color: #7f8c8d;
+  font-size: 1rem;
+}
+
+.dashboard-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.dashboard-section {
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #ecf0f1;
+}
+
+.section-header h3 {
+  color: #34495e;
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+.badge {
+  background-color: #3498db;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.info-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.info-card {
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.info-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.card-icon {
+  font-size: 2.5rem;
+  flex-shrink: 0;
+}
+
+.card-content {
+  flex: 1;
+}
+
+.card-content h4 {
+  color: #7f8c8d;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin: 0 0 0.5rem 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.card-content p {
+  color: #2c3e50;
+  font-size: 1rem;
+  margin: 0;
+  font-weight: 600;
+}
+
+.card-number {
+  font-size: 1.75rem !important;
+  color: #3498db !important;
+}
+
+.no-data {
+  color: #95a5a6 !important;
+  font-size: 0.875rem !important;
+  font-weight: 400 !important;
+  font-style: italic;
+}
+
+/* Status badges */
+:host ::ng-deep .status-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+:host ::ng-deep .status-scheduled {
+  background-color: #e3f2fd;
+  color: #1976d2;
+}
+
+:host ::ng-deep .status-in-progress {
+  background-color: #fff3e0;
+  color: #f57c00;
+}
+
+:host ::ng-deep .status-completed {
+  background-color: #e8f5e9;
+  color: #388e3c;
+}
+
+:host ::ng-deep .status-cancelled {
+  background-color: #ffebee;
+  color: #d32f2f;
+}
+
+:host ::ng-deep .status-pending {
+  background-color: #fff9c4;
+  color: #f9a825;
+}
+
+:host ::ng-deep .status-reviewed {
+  background-color: #f3e5f5;
+  color: #7b1fa2;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .patient-dashboard {
+    padding: 1rem;
+  }
+
+  .dashboard-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .info-cards {
+    grid-template-columns: 1fr;
+  }
+}

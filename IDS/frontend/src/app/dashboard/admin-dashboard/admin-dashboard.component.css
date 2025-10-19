@@ -1,0 +1,340 @@
+.admin-dashboard {
+  padding: 1.5rem;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.dashboard-header {
+  margin-bottom: 2rem;
+}
+
+.dashboard-header h2 {
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+  font-size: 1.75rem;
+}
+
+.subtitle {
+  color: #7f8c8d;
+  font-size: 1rem;
+}
+
+/* Main Stats Grid */
+.main-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.stat-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.75rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-left: 5px solid;
+  transition: all 0.3s;
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.stat-card.patients {
+  border-left-color: #3498db;
+}
+
+.stat-card.appointments {
+  border-left-color: #9b59b6;
+}
+
+.stat-card.staff {
+  border-left-color: #27ae60;
+}
+
+.stat-card.occupancy {
+  border-left-color: #e67e22;
+}
+
+.stat-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.stat-icon {
+  font-size: 2rem;
+}
+
+.stat-header h3 {
+  color: #7f8c8d;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0;
+}
+
+.stat-value {
+  color: #2c3e50;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0 0 0.25rem 0;
+  line-height: 1;
+}
+
+.stat-label {
+  color: #95a5a6;
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+/* Secondary Stats */
+.secondary-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.mini-stat {
+  background: white;
+  border-radius: 8px;
+  padding: 1.25rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.mini-stat-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.mini-icon {
+  font-size: 2rem;
+}
+
+.mini-value {
+  color: #2c3e50;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1;
+}
+
+.mini-label {
+  color: #7f8c8d;
+  font-size: 0.8rem;
+  margin: 0.25rem 0 0 0;
+}
+
+/* Dashboard Content */
+.dashboard-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.dashboard-section {
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #ecf0f1;
+}
+
+.section-header h3 {
+  color: #34495e;
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+.badge {
+  background-color: #95a5a6;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.badge-warning {
+  background-color: #f39c12;
+}
+
+/* Management Actions */
+.management-actions {
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.management-actions h3 {
+  color: #34495e;
+  font-size: 1.25rem;
+  margin: 0 0 1.5rem 0;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #ecf0f1;
+}
+
+.actions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.management-btn {
+  background: white;
+  border: 2px solid #ecf0f1;
+  border-radius: 8px;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-align: left;
+}
+
+.management-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.management-btn.users:hover {
+  border-color: #3498db;
+  background: #f0f8ff;
+}
+
+.management-btn.reports:hover {
+  border-color: #9b59b6;
+  background: #f9f3ff;
+}
+
+.management-btn.settings:hover {
+  border-color: #95a5a6;
+  background: #f8f9fa;
+}
+
+.management-btn.backup:hover {
+  border-color: #27ae60;
+  background: #f0fff4;
+}
+
+.btn-icon {
+  font-size: 2.5rem;
+  flex-shrink: 0;
+}
+
+.btn-content h4 {
+  color: #2c3e50;
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 0.25rem 0;
+}
+
+.btn-content p {
+  color: #7f8c8d;
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+/* Status badges */
+:host ::ng-deep .status-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+:host ::ng-deep .status-scheduled {
+  background-color: #e3f2fd;
+  color: #1976d2;
+}
+
+:host ::ng-deep .status-in-progress {
+  background-color: #fff3e0;
+  color: #f57c00;
+}
+
+:host ::ng-deep .status-completed {
+  background-color: #e8f5e9;
+  color: #388e3c;
+}
+
+:host ::ng-deep .status-cancelled {
+  background-color: #ffebee;
+  color: #d32f2f;
+}
+
+:host ::ng-deep .priority-low {
+  background-color: #e3f2fd;
+  color: #1976d2;
+}
+
+:host ::ng-deep .priority-medium {
+  background-color: #fff3e0;
+  color: #f57c00;
+}
+
+:host ::ng-deep .priority-high {
+  background-color: #fff9c4;
+  color: #f9a825;
+}
+
+:host ::ng-deep .priority-urgent {
+  background-color: #ffebee;
+  color: #d32f2f;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .admin-dashboard {
+    padding: 1rem;
+  }
+
+  .dashboard-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .main-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .stat-card {
+    padding: 1.25rem;
+  }
+
+  .stat-value {
+    font-size: 2rem;
+  }
+
+  .secondary-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .actions-grid {
+    grid-template-columns: 1fr;
+  }
+}

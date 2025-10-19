@@ -1,0 +1,103 @@
+<div class="nurse-dashboard">
+  <div class="dashboard-header">
+    <h2>Panel de Enfermería</h2>
+    <p class="subtitle">Gestiona el cuidado de tus pacientes</p>
+  </div>
+
+  <!-- Summary Cards -->
+  <div class="summary-cards">
+    <div class="summary-card patients">
+      <div class="card-icon">👥</div>
+      <div class="card-info">
+        <h4>Pacientes Asignados</h4>
+        <p class="number">{{ assignedPatients.length }}</p>
+      </div>
+    </div>
+
+    <div class="summary-card vitals">
+      <div class="card-icon">💓</div>
+      <div class="card-info">
+        <h4>Signos Vitales Hoy</h4>
+        <p class="number">{{ vitalSigns.length }}</p>
+      </div>
+    </div>
+
+    <div class="summary-card tasks">
+      <div class="card-icon">✓</div>
+      <div class="card-info">
+        <h4>Tareas Pendientes</h4>
+        <p class="number">{{ tasks.length }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="dashboard-content">
+    <!-- Tasks Section - Priority -->
+    <section class="dashboard-section priority">
+      <div class="section-header">
+        <h3>Tareas Pendientes</h3>
+        <span class="badge badge-urgent">{{ tasks.length }}</span>
+      </div>
+      <app-data-table
+        [columns]="taskColumns"
+        [data]="tasks"
+        [loading]="loadingTasks"
+        (rowClick)="onTaskClick($event)"
+        emptyMessage="No hay tareas pendientes">
+      </app-data-table>
+    </section>
+
+    <!-- Vital Signs Section -->
+    <section class="dashboard-section">
+      <div class="section-header">
+        <h3>Signos Vitales Recientes</h3>
+        <span class="badge">{{ vitalSigns.length }}</span>
+      </div>
+      <app-data-table
+        [columns]="vitalSignsColumns"
+        [data]="vitalSigns"
+        [loading]="loadingVitals"
+        (rowClick)="onVitalSignsClick($event)"
+        emptyMessage="No hay signos vitales registrados">
+      </app-data-table>
+    </section>
+
+    <!-- Assigned Patients Section -->
+    <section class="dashboard-section">
+      <div class="section-header">
+        <h3>Pacientes Asignados</h3>
+        <span class="badge">{{ assignedPatients.length }}</span>
+      </div>
+      <app-data-table
+        [columns]="patientColumns"
+        [data]="assignedPatients"
+        [loading]="loadingPatients"
+        (rowClick)="onPatientClick($event)"
+        emptyMessage="No hay pacientes asignados">
+      </app-data-table>
+    </section>
+
+    <!-- Quick Actions -->
+    <section class="quick-actions">
+      <h3>Acciones Rápidas</h3>
+      <div class="actions-grid">
+        <button class="action-button">
+          <span class="action-icon">📊</span>
+          <span class="action-label">Registrar Signos Vitales</span>
+        </button>
+        <button class="action-button">
+          <span class="action-icon">💊</span>
+          <span class="action-label">Administrar Medicación</span>
+        </button>
+        <button class="action-button">
+          <span class="action-icon">📝</span>
+          <span class="action-label">Nueva Nota</span>
+        </button>
+        <button class="action-button">
+          <span class="action-icon">🔔</span>
+          <span class="action-label">Ver Alertas</span>
+        </button>
+      </div>
+    </section>
+  </div>
+</div>

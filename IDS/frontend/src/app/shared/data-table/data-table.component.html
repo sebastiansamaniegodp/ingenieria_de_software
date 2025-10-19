@@ -1,0 +1,43 @@
+<div class="table-container">
+  <div *ngIf="loading" class="loading-overlay">
+    <div class="spinner"></div>
+    <p>Cargando datos...</p>
+  </div>
+
+  <table class="data-table" *ngIf="!loading">
+    <thead>
+      <tr>
+        <th *ngFor="let column of columns"
+            [class.sortable]="column.sortable"
+            (click)="onSort(column)">
+          {{ column.label }}
+          <span *ngIf="column.sortable && sortColumn === column.key" class="sort-indicator">
+            {{ sortDirection === 'asc' ? '↑' : '↓' }}
+          </span>
+        </th>
+        <th *ngIf="actions.length > 0" class="actions-column">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngIf="data.length === 0">
+        <td [attr.colspan]="columns.length + (actions.length > 0 ? 1 : 0)" class="empty-message">
+          {{ emptyMessage }}
+        </td>
+      </tr>
+      <tr *ngFor="let row of data; trackBy: trackByIndex"
+          (click)="onRowClick(row)"
+          [class.clickable]="rowClick.observed">
+        <td *ngFor="let column of columns" [innerHTML]="getCellValue(row, column)"></td>
+        <td *ngIf="actions.length > 0" class="actions-cell">
+          <button *ngFor="let action of actions"
+                  [class]="'action-btn ' + (action.class || '')"
+                  (click)="$event.stopPropagation(); action.handler(row)"
+                  [title]="action.label">
+            <span *ngIf="action.icon">{{ action.icon }}</span>
+            <span *ngIf="!action.icon">{{ action.label }}</span>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
