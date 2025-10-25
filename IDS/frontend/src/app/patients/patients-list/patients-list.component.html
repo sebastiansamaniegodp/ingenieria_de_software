@@ -1,0 +1,76 @@
+<div class="patients-container">
+  <div class="patients-header">
+    <h2>Gestión de Pacientes</h2>
+    <a routerLink="/patients/new" class="btn btn-primary">
+      <span>➕</span> Nuevo Paciente
+    </a>
+  </div>
+
+  <div class="filters-section">
+    <div class="search-box">
+      <input
+        type="text"
+        [(ngModel)]="searchTerm"
+        (ngModelChange)="filterPatients()"
+        placeholder="Buscar pacientes..."
+        class="search-input"
+      />
+    </div>
+    <div class="filter-box">
+      <select [(ngModel)]="statusFilter" (ngModelChange)="filterPatients()" class="filter-select">
+        <option value="">Todos los estados</option>
+        <option value="active">Activos</option>
+        <option value="inactive">Inactivos</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="table-container" *ngIf="!loading; else loadingTemplate">
+    <table class="patients-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Email</th>
+          <th>Edad</th>
+          <th>Género</th>
+          <th>Tipo de Sangre</th>
+          <th>Teléfono</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let patient of filteredPatients" class="patient-row">
+          <td>{{ patient.id }}</td>
+          <td>{{ patient.first_name }} {{ patient.last_name }}</td>
+          <td>{{ patient.email }}</td>
+          <td>{{ patient.age || '-' }}</td>
+          <td>{{ patient.gender || '-' }}</td>
+          <td>{{ patient.blood_type || '-' }}</td>
+          <td>{{ patient.phone || '-' }}</td>
+          <td>
+            <span class="status-badge" [class.active]="patient.status === 'active'" [class.inactive]="patient.status === 'inactive'">
+              {{ patient.status === 'active' ? 'Activo' : 'Inactivo' }}
+            </span>
+          </td>
+          <td class="actions">
+            <a [routerLink]="['/patients/edit', patient.id]" class="btn-action btn-edit" title="Editar">
+              ✏️
+            </a>
+            <button (click)="deletePatient(patient.id)" class="btn-action btn-delete" title="Eliminar">
+              🗑️
+            </button>
+          </td>
+        </tr>
+        <tr *ngIf="filteredPatients.length === 0">
+          <td colspan="9" class="no-data">No se encontraron pacientes</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <ng-template #loadingTemplate>
+    <div class="loading">Cargando pacientes...</div>
+  </ng-template>
+</div>

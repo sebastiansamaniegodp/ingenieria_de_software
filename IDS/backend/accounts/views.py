@@ -1,6 +1,7 @@
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework_simplejwt.tokens import RefreshToken
 from .serializers import UserRegistrationSerializer
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth import get_user_model
@@ -32,12 +33,20 @@ class BasicLoginView(APIView):
 		if not user.is_active:
 			return Response({'detail': 'Cuenta inactiva'}, status=status.HTTP_403_FORBIDDEN)
 		login(request, user)
+
+		# Generate JWT tokens
+		refresh = RefreshToken.for_user(user)
+
 		return Response({
-			'id': user.id,
-			'email': user.email,
-			'first_name': user.first_name,
-			'last_name': user.last_name,
-			'role': user.role,
+			'access': str(refresh.access_token),
+			'refresh': str(refresh),
+			'user': {
+				'id': user.id,
+				'email': user.email,
+				'first_name': user.first_name,
+				'last_name': user.last_name,
+				'role': user.role,
+			}
 		})
 
 

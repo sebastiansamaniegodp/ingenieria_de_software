@@ -24,6 +24,9 @@ def home(request):
         'endpoints': {
             'admin': '/admin/',
             'api_auth': '/api/auth/',
+            'api_patients': '/api/patients/',
+            'api_appointments': '/api/appointments/',
+            'api_medical_records': '/api/medical-records/',
         }
     })
 
@@ -31,4 +34,7 @@ urlpatterns = [
     path('', home, name='home'),
     path('admin/', admin.site.urls),
     path('api/auth/', include('accounts.urls')),
+    path('api/patients/', include('patients.urls')),
+    path('api/appointments/', include('appointments.urls')),
+    path('api/medical-records/', include('medical_records.urls')),
 ]

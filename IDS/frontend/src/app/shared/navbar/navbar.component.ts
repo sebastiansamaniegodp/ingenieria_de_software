@@ -1,32 +1,18 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
-import { NavbarComponent } from '../shared/navbar/navbar.component';
-import { PatientDashboardComponent } from './patient-dashboard/patient-dashboard.component';
-import { DoctorDashboardComponent } from './doctor-dashboard/doctor-dashboard.component';
-import { NurseDashboardComponent } from './nurse-dashboard/nurse-dashboard.component';
-import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
-import { StaffDashboardComponent } from './staff-dashboard/staff-dashboard.component';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-dashboard',
+  selector: 'app-navbar',
   standalone: true,
-  imports: [
-    CommonModule,
-    NavbarComponent,
-    PatientDashboardComponent,
-    DoctorDashboardComponent,
-    NurseDashboardComponent,
-    AdminDashboardComponent,
-    StaffDashboardComponent
-  ],
-  templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.css'
+  imports: [CommonModule, RouterModule],
+  templateUrl: './navbar.component.html',
+  styleUrl: './navbar.component.css'
 })
-export class DashboardComponent {
+export class NavbarComponent {
   user = JSON.parse(localStorage.getItem('user') || 'null');
 
-  constructor(public router: Router) {}
+  constructor(private router: Router) {}
 
   get userRole(): string {
     return this.user?.role || '';
@@ -48,6 +34,18 @@ export class DashboardComponent {
       'PATIENT': 'Paciente'
     };
     return roleLabels[this.userRole] || this.userRole;
+  }
+
+  canAccessPatients(): boolean {
+    return ['ADMIN', 'DOCTOR', 'NURSE', 'STAFF'].includes(this.userRole);
+  }
+
+  canAccessAppointments(): boolean {
+    return ['ADMIN', 'DOCTOR', 'NURSE', 'PATIENT'].includes(this.userRole);
+  }
+
+  canAccessMedicalRecords(): boolean {
+    return ['ADMIN', 'DOCTOR', 'NURSE'].includes(this.userRole);
   }
 
   logout() {

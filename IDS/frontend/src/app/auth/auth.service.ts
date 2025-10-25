@@ -23,13 +23,20 @@ export class AuthService {
     });
     const json = await resp.json();
     if (!resp.ok) throw json;
-    localStorage.setItem('user', JSON.stringify(json));
+
+    // Store JWT tokens separately for the interceptor
+    localStorage.setItem('access', json.access);
+    localStorage.setItem('refresh', json.refresh);
+    localStorage.setItem('user', JSON.stringify(json.user));
+
     return json;
   }
 
   logout() {
     // Optionally call backend logout if needed
     fetch(`${this.baseUrl}/logout/`, { method: 'POST' }).finally(() => {
+      localStorage.removeItem('access');
+      localStorage.removeItem('refresh');
       localStorage.removeItem('user');
     });
   }
