@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { PatientsService } from '../../services/patients.service';
 import { Patient } from '../../models/patient.model';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-patients-list',
@@ -19,7 +20,10 @@ export class PatientsListComponent implements OnInit {
   searchTerm = '';
   statusFilter = '';
 
-  constructor(private patientsService: PatientsService) {}
+  constructor(
+    private patientsService: PatientsService,
+    private notificationService: NotificationService
+  ) {}
 
   ngOnInit() {
     this.loadPatients();
@@ -57,11 +61,12 @@ export class PatientsListComponent implements OnInit {
     if (confirm('¿Está seguro de eliminar este paciente?')) {
       this.patientsService.deletePatient(id).subscribe({
         next: () => {
+          this.notificationService.success('Paciente eliminado exitosamente');
           this.loadPatients();
         },
         error: (error) => {
           console.error('Error deleting patient:', error);
-          alert('Error al eliminar el paciente');
+          this.notificationService.error('Error al eliminar el paciente');
         }
       });
     }

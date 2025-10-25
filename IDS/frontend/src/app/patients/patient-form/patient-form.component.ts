@@ -4,6 +4,7 @@ import { Router, ActivatedRoute, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { PatientsService } from '../../services/patients.service';
 import { Patient } from '../../models/patient.model';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-patient-form',
@@ -33,7 +34,8 @@ export class PatientFormComponent implements OnInit {
   constructor(
     private patientsService: PatientsService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit() {
@@ -57,7 +59,7 @@ export class PatientFormComponent implements OnInit {
       },
       error: (error) => {
         console.error('Error loading patient:', error);
-        alert('Error al cargar el paciente');
+        this.notificationService.error('Error al cargar el paciente');
         this.loading = false;
         this.router.navigate(['/patients']);
       }
@@ -73,12 +75,12 @@ export class PatientFormComponent implements OnInit {
 
     operation.subscribe({
       next: () => {
-        alert(`Paciente ${this.isEditMode ? 'actualizado' : 'creado'} exitosamente`);
+        this.notificationService.success(`Paciente ${this.isEditMode ? 'actualizado' : 'creado'} exitosamente`);
         this.router.navigate(['/patients']);
       },
       error: (error) => {
         console.error('Error saving patient:', error);
-        alert('Error al guardar el paciente: ' + (error.error?.email?.[0] || error.message));
+        this.notificationService.error('Error al guardar el paciente: ' + (error.error?.email?.[0] || error.message));
         this.submitting = false;
       }
     });
