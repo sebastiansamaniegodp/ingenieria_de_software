@@ -1,6 +1,11 @@
 <div class="patients-container">
   <div class="patients-header">
-    <h2>Gestión de Pacientes</h2>
+    <div class="header-left">
+      <button (click)="goBack()" class="btn-back" title="Volver al Dashboard">
+        ← Volver
+      </button>
+      <h2>Gestión de Pacientes</h2>
+    </div>
     <a routerLink="/patients/new" class="btn btn-primary">
       <span>➕</span> Nuevo Paciente
     </a>

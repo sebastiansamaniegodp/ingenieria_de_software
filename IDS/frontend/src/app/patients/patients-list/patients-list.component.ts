@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { Location } from '@angular/common';
 import { PatientsService } from '../../services/patients.service';
 import { Patient } from '../../models/patient.model';
 import { NotificationService } from '../../services/notification.service';
@@ -22,7 +23,9 @@ export class PatientsListComponent implements OnInit {
 
   constructor(
     private patientsService: PatientsService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private location: Location,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -70,5 +73,9 @@ export class PatientsListComponent implements OnInit {
         }
       });
     }
+  }
+
+  goBack() {
+    this.router.navigate(['/dashboard']);
   }
 }
