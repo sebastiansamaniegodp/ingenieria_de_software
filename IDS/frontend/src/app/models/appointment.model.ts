@@ -1,10 +1,17 @@
 export interface Appointment {
-  id: number;
-  patient_name: string;
-  doctor_name: string;
+  id?: number;
+  patient: number;
+  patient_name?: string;
+  patient_details?: any;
+  doctor: number;
+  doctor_name?: string;
+  doctor_details?: any;
   date: string;
   time: string;
-  type: string;
+  appointment_type: string;
   status: 'scheduled' | 'completed' | 'cancelled' | 'in_progress';
   room?: string;
+  notes?: string;
+  created_at?: string;
+  updated_at?: string;
 }

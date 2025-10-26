@@ -25,11 +25,11 @@ export class DashboardService {
     // return this.http.get<Appointment[]>(`${this.apiUrl}/appointments/`);
 
     const mockAppointments: Appointment[] = [
-      { id: 1, patient_name: 'Juan Pérez', doctor_name: 'Dra. García', date: '2025-10-19', time: '09:00', type: 'Consulta General', status: 'scheduled', room: 'Consultorio 1' },
-      { id: 2, patient_name: 'María López', doctor_name: 'Dr. Martínez', date: '2025-10-19', time: '10:30', type: 'Control', status: 'in_progress', room: 'Consultorio 2' },
-      { id: 3, patient_name: 'Carlos Rodríguez', doctor_name: 'Dra. Fernández', date: '2025-10-19', time: '11:00', type: 'Urgencia', status: 'scheduled', room: 'Emergencia' },
-      { id: 4, patient_name: 'Ana Martín', doctor_name: 'Dr. Sánchez', date: '2025-10-20', time: '14:00', type: 'Seguimiento', status: 'scheduled', room: 'Consultorio 3' },
-      { id: 5, patient_name: 'Pedro González', doctor_name: 'Dra. García', date: '2025-10-21', time: '09:30', type: 'Revisión', status: 'scheduled', room: 'Consultorio 1' }
+      { id: 1, patient: 1, patient_name: 'Juan Pérez', doctor: 1, doctor_name: 'Dra. García', date: '2025-10-19', time: '09:00', appointment_type: 'consultation', status: 'scheduled', room: 'Consultorio 1' },
+      { id: 2, patient: 2, patient_name: 'María López', doctor: 2, doctor_name: 'Dr. Martínez', date: '2025-10-19', time: '10:30', appointment_type: 'followup', status: 'in_progress', room: 'Consultorio 2' },
+      { id: 3, patient: 3, patient_name: 'Carlos Rodríguez', doctor: 3, doctor_name: 'Dra. Fernández', date: '2025-10-19', time: '11:00', appointment_type: 'emergency', status: 'scheduled', room: 'Emergencia' },
+      { id: 4, patient: 4, patient_name: 'Ana Martín', doctor: 4, doctor_name: 'Dr. Sánchez', date: '2025-10-20', time: '14:00', appointment_type: 'followup', status: 'scheduled', room: 'Consultorio 3' },
+      { id: 5, patient: 5, patient_name: 'Pedro González', doctor: 1, doctor_name: 'Dra. García', date: '2025-10-21', time: '09:30', appointment_type: 'consultation', status: 'scheduled', room: 'Consultorio 1' }
     ];
 
     return of(mockAppointments).pipe(delay(300)); // Simulate network delay
@@ -41,9 +41,9 @@ export class DashboardService {
 
     const today = new Date().toISOString().split('T')[0];
     const mockAppointments: Appointment[] = [
-      { id: 1, patient_name: 'Juan Pérez', doctor_name: 'Dra. García', date: today, time: '09:00', type: 'Consulta General', status: 'scheduled', room: 'Consultorio 1' },
-      { id: 2, patient_name: 'María López', doctor_name: 'Dr. Martínez', date: today, time: '10:30', type: 'Control', status: 'in_progress', room: 'Consultorio 2' },
-      { id: 3, patient_name: 'Carlos Rodríguez', doctor_name: 'Dra. Fernández', date: today, time: '11:00', type: 'Urgencia', status: 'scheduled', room: 'Emergencia' }
+      { id: 1, patient: 1, patient_name: 'Juan Pérez', doctor: 1, doctor_name: 'Dra. García', date: today, time: '09:00', appointment_type: 'consultation', status: 'scheduled', room: 'Consultorio 1' },
+      { id: 2, patient: 2, patient_name: 'María López', doctor: 2, doctor_name: 'Dr. Martínez', date: today, time: '10:30', appointment_type: 'followup', status: 'in_progress', room: 'Consultorio 2' },
+      { id: 3, patient: 3, patient_name: 'Carlos Rodríguez', doctor: 3, doctor_name: 'Dra. Fernández', date: today, time: '11:00', appointment_type: 'emergency', status: 'scheduled', room: 'Emergencia' }
     ];
 
     return of(mockAppointments).pipe(delay(300));

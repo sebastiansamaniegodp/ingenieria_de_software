@@ -1,0 +1,107 @@
+<div class="appointments-container">
+  <div class="appointments-header">
+    <div class="header-left">
+      <button (click)="goBack()" class="btn-back" title="Volver al Dashboard">
+        ← Volver
+      </button>
+      <h2>Gestión de Citas</h2>
+    </div>
+    <a routerLink="/appointments/new" class="btn btn-primary">
+      <span>➕</span> Nueva Cita
+    </a>
+  </div>
+
+  <div class="filters-section">
+    <div class="search-box">
+      <input
+        type="text"
+        [(ngModel)]="searchTerm"
+        (ngModelChange)="filterAppointments()"
+        placeholder="Buscar por paciente, doctor o sala..."
+        class="search-input"
+      />
+    </div>
+    <div class="filter-box">
+      <input
+        type="date"
+        [(ngModel)]="dateFilter"
+        (ngModelChange)="filterAppointments()"
+        class="filter-select"
+        placeholder="Fecha"
+      />
+    </div>
+    <div class="filter-box">
+      <select [(ngModel)]="statusFilter" (ngModelChange)="filterAppointments()" class="filter-select">
+        <option value="">Todos los estados</option>
+        <option value="scheduled">Programada</option>
+        <option value="in_progress">En Progreso</option>
+        <option value="completed">Completada</option>
+        <option value="cancelled">Cancelada</option>
+      </select>
+    </div>
+    <div class="filter-box">
+      <select [(ngModel)]="typeFilter" (ngModelChange)="filterAppointments()" class="filter-select">
+        <option value="">Todos los tipos</option>
+        <option value="consultation">Consulta</option>
+        <option value="followup">Seguimiento</option>
+        <option value="emergency">Emergencia</option>
+        <option value="surgery">Cirugía</option>
+        <option value="therapy">Terapia</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="table-container" *ngIf="!loading; else loadingTemplate">
+    <table class="appointments-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Paciente</th>
+          <th>Doctor</th>
+          <th>Fecha</th>
+          <th>Hora</th>
+          <th>Tipo</th>
+          <th>Estado</th>
+          <th>Sala</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let appointment of filteredAppointments" class="appointment-row">
+          <td>{{ appointment.id }}</td>
+          <td>{{ appointment.patient_name || '-' }}</td>
+          <td>{{ appointment.doctor_name || '-' }}</td>
+          <td>{{ appointment.date }}</td>
+          <td>{{ appointment.time }}</td>
+          <td>{{ getTypeLabel(appointment.appointment_type) }}</td>
+          <td>
+            <span 
+              class="status-badge" 
+              [class.scheduled]="appointment.status === 'scheduled'"
+              [class.in-progress]="appointment.status === 'in_progress'"
+              [class.completed]="appointment.status === 'completed'"
+              [class.cancelled]="appointment.status === 'cancelled'">
+              {{ getStatusLabel(appointment.status) }}
+            </span>
+          </td>
+          <td>{{ appointment.room || '-' }}</td>
+          <td class="actions">
+            <a [routerLink]="['/appointments/edit', appointment.id]" class="btn-action btn-edit" title="Editar">
+              ✏️
+            </a>
+            <button (click)="deleteAppointment(appointment.id)" class="btn-action btn-delete" title="Eliminar">
+              🗑️
+            </button>
+          </td>
+        </tr>
+        <tr *ngIf="filteredAppointments.length === 0">
+          <td colspan="9" class="no-data">No se encontraron citas</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <ng-template #loadingTemplate>
+    <div class="loading">Cargando citas...</div>
+  </ng-template>
+</div>

@@ -8,10 +8,11 @@ import { Appointment } from '../models/appointment.model';
 })
 export class AppointmentsService {
   private apiUrl = 'http://localhost:8000/api/appointments/';
+  private authUrl = 'http://localhost:8000/api/auth/users/';
 
   constructor(private http: HttpClient) {}
 
-  getAppointments(filters?: any): Observable<any[]> {
+  getAppointments(filters?: any): Observable<Appointment[]> {
     let params = new HttpParams();
     if (filters) {
       Object.keys(filters).forEach(key => {
@@ -20,22 +21,26 @@ export class AppointmentsService {
         }
       });
     }
-    return this.http.get<any[]>(this.apiUrl, { params });
+    return this.http.get<Appointment[]>(this.apiUrl, { params });
   }
 
-  getAppointment(id: number): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}${id}/`);
+  getAppointment(id: number): Observable<Appointment> {
+    return this.http.get<Appointment>(`${this.apiUrl}${id}/`);
   }
 
-  createAppointment(appointment: any): Observable<any> {
-    return this.http.post<any>(this.apiUrl, appointment);
+  createAppointment(appointment: Partial<Appointment>): Observable<Appointment> {
+    return this.http.post<Appointment>(this.apiUrl, appointment);
   }
 
-  updateAppointment(id: number, appointment: any): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}${id}/`, appointment);
+  updateAppointment(id: number, appointment: Partial<Appointment>): Observable<Appointment> {
+    return this.http.put<Appointment>(`${this.apiUrl}${id}/`, appointment);
   }
 
   deleteAppointment(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}${id}/`);
+  }
+
+  getDoctors(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.authUrl}?role=DOCTOR`);
   }
 }

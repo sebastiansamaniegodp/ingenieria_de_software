@@ -1,0 +1,145 @@
+<div class="form-container">
+  <div class="form-header">
+    <h2>{{ isEditMode ? 'Editar Cita' : 'Nueva Cita' }}</h2>
+  </div>
+
+  <div *ngIf="loading" class="loading">Cargando...</div>
+
+  <form *ngIf="!loading" (ngSubmit)="onSubmit()" class="appointment-form">
+    <div class="form-row">
+      <div class="form-group">
+        <label for="patient">Paciente *</label>
+        <select
+          id="patient"
+          name="patient"
+          [(ngModel)]="appointment.patient"
+          required
+          class="form-control"
+          [disabled]="submitting">
+          <option value="0" disabled>Seleccione un paciente</option>
+          <option *ngFor="let patient of patients" [value]="patient.id">
+            {{ patient.first_name }} {{ patient.last_name }} - {{ patient.email }}
+          </option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="doctor">Doctor *</label>
+        <select
+          id="doctor"
+          name="doctor"
+          [(ngModel)]="appointment.doctor"
+          required
+          class="form-control"
+          [disabled]="submitting">
+          <option value="0" disabled>Seleccione un doctor</option>
+          <option *ngFor="let doctor of doctors" [value]="doctor.id">
+            {{ doctor.first_name }} {{ doctor.last_name }} - {{ doctor.email }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="date">Fecha *</label>
+        <input
+          type="date"
+          id="date"
+          name="date"
+          [(ngModel)]="appointment.date"
+          required
+          class="form-control"
+          [disabled]="submitting"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="time">Hora *</label>
+        <input
+          type="time"
+          id="time"
+          name="time"
+          [(ngModel)]="appointment.time"
+          required
+          class="form-control"
+          [disabled]="submitting"
+        />
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="appointment_type">Tipo de Cita *</label>
+        <select
+          id="appointment_type"
+          name="appointment_type"
+          [(ngModel)]="appointment.appointment_type"
+          required
+          class="form-control"
+          [disabled]="submitting">
+          <option value="consultation">Consulta</option>
+          <option value="followup">Seguimiento</option>
+          <option value="emergency">Emergencia</option>
+          <option value="surgery">Cirugía</option>
+          <option value="therapy">Terapia</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="status">Estado *</label>
+        <select
+          id="status"
+          name="status"
+          [(ngModel)]="appointment.status"
+          required
+          class="form-control"
+          [disabled]="submitting">
+          <option value="scheduled">Programada</option>
+          <option value="in_progress">En Progreso</option>
+          <option value="completed">Completada</option>
+          <option value="cancelled">Cancelada</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="room">Sala</label>
+        <input
+          type="text"
+          id="room"
+          name="room"
+          [(ngModel)]="appointment.room"
+          placeholder="Ej: Sala 101"
+          class="form-control"
+          [disabled]="submitting"
+        />
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group full-width">
+        <label for="notes">Notas</label>
+        <textarea
+          id="notes"
+          name="notes"
+          [(ngModel)]="appointment.notes"
+          rows="4"
+          placeholder="Notas adicionales sobre la cita..."
+          class="form-control"
+          [disabled]="submitting">
+        </textarea>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="button" (click)="cancel()" class="btn btn-secondary" [disabled]="submitting">
+        Cancelar
+      </button>
+      <button type="submit" class="btn btn-primary" [disabled]="submitting">
+        {{ submitting ? 'Guardando...' : (isEditMode ? 'Actualizar' : 'Crear') }}
+      </button>
+    </div>
+  </form>
+</div>
