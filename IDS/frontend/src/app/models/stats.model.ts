@@ -10,13 +10,16 @@ export interface DashboardStats {
 
 export interface VitalSigns {
   id: number;
-  patient_id: number;
+  patient: number;
   patient_name: string;
   temperature?: number;
   blood_pressure?: string;
   heart_rate?: number;
   respiratory_rate?: number;
   oxygen_saturation?: number;
+  recorded_by?: number;
+  recorded_by_name?: string;
   recorded_at: string;
-  recorded_by: string;
+  notes?: string;
+  created_at?: string;
 }

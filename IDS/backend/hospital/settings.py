@@ -50,6 +50,9 @@ INSTALLED_APPS = [
     'patients',
     'appointments',
     'medical_records',
+    'tasks',
+    'notifications',
+    'vital_signs',
 ]
 
 MIDDLEWARE = [

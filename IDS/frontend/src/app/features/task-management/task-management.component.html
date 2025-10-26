@@ -1,0 +1,36 @@
+<div class="task-management-container">
+  <header class="page-header">
+    <h1>Gestión de Tareas</h1>
+  </header>
+
+  <div class="task-list" *ngIf="!loading; else loadingTemplate">
+    <div class="task-card" *ngFor="let task of tasks">
+      <div class="task-header">
+        <h3>{{ task.title }}</h3>
+        <span class="priority-badge" [ngClass]="getPriorityClass(task.priority)">
+          {{ formatPriority(task.priority) }}
+        </span>
+      </div>
+      <p class="task-description">{{ task.description }}</p>
+      <div class="task-footer">
+        <span class="status-badge" [ngClass]="getStatusClass(task.status)">
+          {{ formatStatus(task.status) }}
+        </span>
+        <span class="assigned-to" *ngIf="task.assigned_to_name">
+          Asignado a: {{ task.assigned_to_name }}
+        </span>
+        <span class="due-date" *ngIf="task.due_date">
+          Vence: {{ task.due_date }}
+        </span>
+      </div>
+    </div>
+
+    <div class="empty-state" *ngIf="tasks.length === 0">
+      <p>No hay tareas disponibles</p>
+    </div>
+  </div>
+
+  <ng-template #loadingTemplate>
+    <div class="loading-spinner">Cargando tareas...</div>
+  </ng-template>
+</div>

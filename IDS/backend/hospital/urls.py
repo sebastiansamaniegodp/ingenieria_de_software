@@ -27,6 +27,9 @@ def home(request):
             'api_patients': '/api/patients/',
             'api_appointments': '/api/appointments/',
             'api_medical_records': '/api/medical-records/',
+            'api_tasks': '/api/tasks/',
+            'api_notifications': '/api/notifications/',
+            'api_vital_signs': '/api/vital-signs/',
         }
     })
 
@@ -37,4 +40,7 @@ urlpatterns = [
     path('api/patients/', include('patients.urls')),
     path('api/appointments/', include('appointments.urls')),
     path('api/medical-records/', include('medical_records.urls')),
+    path('api/tasks/', include('tasks.urls')),
+    path('api/notifications/', include('notifications.urls')),
+    path('api/vital-signs/', include('vital_signs.urls')),
 ]

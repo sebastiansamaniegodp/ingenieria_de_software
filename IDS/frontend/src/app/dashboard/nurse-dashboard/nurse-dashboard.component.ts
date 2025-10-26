@@ -117,7 +117,7 @@ export class NurseDashboardComponent implements OnInit {
 
   loadTasks() {
     this.loadingTasks = true;
-    this.dashboardService.getTasks('Enfermería').subscribe({
+    this.dashboardService.getTasks().subscribe({
       next: (data) => {
         this.tasks = data.filter(t => t.status !== 'completed');
         this.loadingTasks = false;
@@ -198,7 +198,7 @@ export class NurseDashboardComponent implements OnInit {
           recordedDate.setHours(0, 0, 0, 0);
           return recordedDate.getTime() === today.getTime();
         })
-        .map(vital => vital.patient_id)
+        .map(vital => vital.patient)
     );
 
     return uniquePatientIds.size;
