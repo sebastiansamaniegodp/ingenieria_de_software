@@ -179,8 +179,8 @@ export class AdminDashboardComponent implements OnInit {
           datasets: [{
             label: 'Citas por Día',
             data: data.by_date.map((d: any) => d.count),
-            borderColor: '#4F46E5',
-            backgroundColor: 'rgba(79, 70, 229, 0.1)',
+            borderColor: '#5a6c7d',
+            backgroundColor: 'rgba(90, 108, 125, 0.1)',
             tension: 0.4,
             fill: true
           }]
@@ -200,11 +200,11 @@ export class AdminDashboardComponent implements OnInit {
           datasets: [{
             data: data.by_type.map((d: any) => d.count),
             backgroundColor: [
-              '#4F46E5',
-              '#10B981',
-              '#F59E0B',
-              '#EF4444',
-              '#8B5CF6'
+              '#5a6c7d',
+              '#6b7985',
+              '#7a8c9d',
+              '#8a9aad',
+              '#9aaabd'
             ]
           }]
         };
@@ -222,10 +222,10 @@ export class AdminDashboardComponent implements OnInit {
           datasets: [{
             data: data.by_status.map((d: any) => d.count),
             backgroundColor: [
-              '#3B82F6',
-              '#F59E0B',
-              '#10B981',
-              '#EF4444'
+              '#6b7985',
+              '#7a8c9d',
+              '#8a9aad',
+              '#9aaabd'
             ]
           }]
         };

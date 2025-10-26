@@ -3,20 +3,20 @@
 
 /* Variables CSS para consistencia de colores - tema hospitalario */
 :root {
-  --primary-color: #0066cc;
-  --primary-dark: #004c99;
-  --primary-light: #3385d6;
-  --accent-color: #00a86b;
-  --accent-dark: #008556;
-  --background-gradient-start: #f0f4f8;
-  --background-gradient-end: #d9e8f5;
+  --primary-color: #5a6c7d;
+  --primary-dark: #3d4d5c;
+  --primary-light: #7a8c9d;
+  --accent-color: #6b7985;
+  --accent-dark: #556068;
+  --background-gradient-start: #f5f5f5;
+  --background-gradient-end: #e8e8e8;
   --card-bg: #ffffff;
   --text-primary: #1a202c;
   --text-secondary: #4a5568;
   --text-light: #718096;
   --border-color: #e2e8f0;
-  --error-color: #e53e3e;
-  --success-color: #38a169;
+  --error-color: #c5534d;
+  --success-color: #6b9175;
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
   --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
@@ -247,28 +247,28 @@ button:disabled {
 }
 
 .badge-primary {
-  background-color: #e3f2fd;
-  color: #1976d2;
+  background-color: #e8eaed;
+  color: #5a6c7d;
 }
 
 .badge-success {
-  background-color: #e8f5e9;
-  color: #388e3c;
+  background-color: #e8ebe9;
+  color: #6b9175;
 }
 
 .badge-warning {
-  background-color: #fff3e0;
-  color: #f57c00;
+  background-color: #f5f3f0;
+  color: #9b8560;
 }
 
 .badge-danger {
-  background-color: #ffebee;
-  color: #d32f2f;
+  background-color: #f0e8e8;
+  color: #c5534d;
 }
 
 .badge-info {
-  background-color: #f3e5f5;
-  color: #7b1fa2;
+  background-color: #eaebec;
+  color: #6b7985;
 }
 
 /* Accessibility */

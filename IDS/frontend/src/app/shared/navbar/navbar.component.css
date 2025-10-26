@@ -1,5 +1,5 @@
 .navbar {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   position: sticky;
   top: 0;
@@ -39,6 +39,7 @@
 
 .brand-icon {
   font-size: 1.75rem;
+  color: white;
 }
 
 .brand-text {
@@ -87,6 +88,7 @@
 
 .nav-icon {
   font-size: 1.25rem;
+  color: white;
 }
 
 .nav-text {
@@ -120,6 +122,7 @@
   height: 36px;
   background: rgba(255, 255, 255, 0.2);
   border-radius: 50%;
+  color: white;
 }
 
 .user-details {
@@ -164,6 +167,7 @@
 
 .logout-icon {
   font-size: 1.25rem;
+  color: white;
 }
 
 /* Responsive Design */

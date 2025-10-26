@@ -28,14 +28,14 @@
 }
 
 .stat-card {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #5a6c7d 0%, #4a5568 100%);
   color: white;
   border-radius: 12px;
   padding: 1.5rem;
   display: flex;
   align-items: center;
   gap: 1rem;
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 4px 12px rgba(90, 108, 125, 0.3);
   transition: transform 0.2s;
 }
 
@@ -44,21 +44,22 @@
 }
 
 .stat-card:nth-child(2) {
-  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  background: linear-gradient(135deg, #6b7985 0%, #5a6c7d 100%);
 }
 
 .stat-card:nth-child(3) {
-  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  background: linear-gradient(135deg, #7a8c9d 0%, #6b7985 100%);
 }
 
 .stat-card:nth-child(4) {
-  background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+  background: linear-gradient(135deg, #8a9aad 0%, #7a8c9d 100%);
 }
 
 .stat-icon {
   font-size: 2.5rem;
   flex-shrink: 0;
   opacity: 0.9;
+  color: white;
 }
 
 .stat-content h4 {
@@ -115,7 +116,7 @@
 }
 
 .dashboard-section.priority {
-  border-left: 4px solid #667eea;
+  border-left: 4px solid #5a6c7d;
 }
 
 .section-header {
@@ -143,7 +144,7 @@
 }
 
 .badge-primary {
-  background-color: #667eea;
+  background-color: #5a6c7d;
 }
 
 /* Quick Actions */
@@ -183,14 +184,15 @@
 }
 
 .action-button:hover {
-  border-color: #667eea;
-  background: #f8f9ff;
+  border-color: #5a6c7d;
+  background: #f5f5f5;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+  box-shadow: 0 4px 12px rgba(90, 108, 125, 0.15);
 }
 
 .action-icon {
   font-size: 2rem;
+  color: #5a6c7d;
 }
 
 .action-label {
@@ -211,33 +213,33 @@
 }
 
 :host ::ng-deep .status-scheduled {
-  background-color: #e3f2fd;
-  color: #1976d2;
+  background-color: #e8eaed;
+  color: #5a6c7d;
 }
 
 :host ::ng-deep .status-in-progress {
-  background-color: #fff3e0;
-  color: #f57c00;
+  background-color: #f0f0f0;
+  color: #7a8c9d;
 }
 
 :host ::ng-deep .status-completed {
-  background-color: #e8f5e9;
-  color: #388e3c;
+  background-color: #e8ebe9;
+  color: #6b9175;
 }
 
 :host ::ng-deep .status-cancelled {
-  background-color: #ffebee;
-  color: #d32f2f;
+  background-color: #f0e8e8;
+  color: #9a8a8a;
 }
 
 :host ::ng-deep .status-active {
-  background-color: #e8f5e9;
-  color: #388e3c;
+  background-color: #e8ebe9;
+  color: #6b9175;
 }
 
 :host ::ng-deep .status-inactive {
   background-color: #f5f5f5;
-  color: #757575;
+  color: #8a8a8a;
 }
 
 /* Responsive design */

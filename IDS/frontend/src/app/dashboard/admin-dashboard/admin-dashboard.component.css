@@ -42,19 +42,19 @@
 }
 
 .stat-card.patients {
-  border-left-color: #3498db;
+  border-left-color: #5a6c7d;
 }
 
 .stat-card.appointments {
-  border-left-color: #9b59b6;
+  border-left-color: #6b7985;
 }
 
 .stat-card.staff {
-  border-left-color: #27ae60;
+  border-left-color: #7a8c9d;
 }
 
 .stat-card.occupancy {
-  border-left-color: #e67e22;
+  border-left-color: #8a9aad;
 }
 
 .stat-header {
@@ -66,6 +66,7 @@
 
 .stat-icon {
   font-size: 2rem;
+  color: #5a6c7d;
 }
 
 .stat-header h3 {
@@ -114,6 +115,7 @@
 
 .mini-icon {
   font-size: 2rem;
+  color: #5a6c7d;
 }
 
 .mini-value {
@@ -193,7 +195,7 @@
 }
 
 .badge-warning {
-  background-color: #f39c12;
+  background-color: #9b8560;
 }
 
 /* Management Actions */
@@ -237,28 +239,29 @@
 }
 
 .management-btn.users:hover {
-  border-color: #3498db;
-  background: #f0f8ff;
+  border-color: #5a6c7d;
+  background: #f5f5f5;
 }
 
 .management-btn.reports:hover {
-  border-color: #9b59b6;
-  background: #f9f3ff;
+  border-color: #6b7985;
+  background: #f5f5f5;
 }
 
 .management-btn.settings:hover {
-  border-color: #95a5a6;
-  background: #f8f9fa;
+  border-color: #7a8c9d;
+  background: #f5f5f5;
 }
 
 .management-btn.backup:hover {
-  border-color: #27ae60;
-  background: #f0fff4;
+  border-color: #8a9aad;
+  background: #f5f5f5;
 }
 
 .btn-icon {
   font-size: 2.5rem;
   flex-shrink: 0;
+  color: #5a6c7d;
 }
 
 .btn-content h4 {
@@ -286,43 +289,43 @@
 }
 
 :host ::ng-deep .status-scheduled {
-  background-color: #e3f2fd;
-  color: #1976d2;
+  background-color: #e8eaed;
+  color: #5a6c7d;
 }
 
 :host ::ng-deep .status-in-progress {
-  background-color: #fff3e0;
-  color: #f57c00;
+  background-color: #f0f0f0;
+  color: #7a8c9d;
 }
 
 :host ::ng-deep .status-completed {
-  background-color: #e8f5e9;
-  color: #388e3c;
+  background-color: #e8ebe9;
+  color: #6b9175;
 }
 
 :host ::ng-deep .status-cancelled {
-  background-color: #ffebee;
-  color: #d32f2f;
+  background-color: #f0e8e8;
+  color: #9a8a8a;
 }
 
 :host ::ng-deep .priority-low {
-  background-color: #e3f2fd;
-  color: #1976d2;
+  background-color: #e8eaed;
+  color: #7a8c9d;
 }
 
 :host ::ng-deep .priority-medium {
-  background-color: #fff3e0;
-  color: #f57c00;
+  background-color: #f0f0f0;
+  color: #8a9aad;
 }
 
 :host ::ng-deep .priority-high {
-  background-color: #fff9c4;
-  color: #f9a825;
+  background-color: #f5f3f0;
+  color: #9b8560;
 }
 
 :host ::ng-deep .priority-urgent {
-  background-color: #ffebee;
-  color: #d32f2f;
+  background-color: #f0e8e8;
+  color: #9a8a8a;
 }
 
 /* Responsive design */

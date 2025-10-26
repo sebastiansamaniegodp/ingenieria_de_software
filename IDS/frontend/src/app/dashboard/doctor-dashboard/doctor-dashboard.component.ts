@@ -148,8 +148,8 @@ export class DoctorDashboardComponent implements OnInit {
           datasets: [{
             label: 'Mis Citas por Día',
             data: data.by_date.map((d: any) => d.count),
-            borderColor: '#10B981',
-            backgroundColor: 'rgba(16, 185, 129, 0.1)',
+            borderColor: '#6b7985',
+            backgroundColor: 'rgba(107, 121, 133, 0.1)',
             tension: 0.4,
             fill: true
           }]
@@ -169,11 +169,11 @@ export class DoctorDashboardComponent implements OnInit {
           datasets: [{
             data: data.by_type.map((d: any) => d.count),
             backgroundColor: [
-              '#10B981',
-              '#3B82F6',
-              '#F59E0B',
-              '#EF4444',
-              '#8B5CF6'
+              '#6b7985',
+              '#7a8c9d',
+              '#8a9aad',
+              '#9aaabd',
+              '#aababd'
             ]
           }]
         };

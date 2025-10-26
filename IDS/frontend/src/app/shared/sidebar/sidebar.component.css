@@ -4,7 +4,7 @@
   top: 0;
   height: 100vh;
   width: 260px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
   color: white;
   display: flex;
   flex-direction: column;
@@ -70,6 +70,7 @@
   min-width: 40px;
   display: flex;
   justify-content: center;
+  color: white;
 }
 
 .brand-text {
@@ -128,6 +129,7 @@
 
 .section-icon {
   font-size: 14px;
+  color: white;
 }
 
 /* Navigation Links */
@@ -178,6 +180,7 @@
   min-width: 24px;
   display: flex;
   justify-content: center;
+  color: white;
 }
 
 .nav-text {
@@ -213,6 +216,7 @@
   min-width: 28px;
   display: flex;
   justify-content: center;
+  color: white;
 }
 
 .user-details {
@@ -260,6 +264,7 @@
 
 .logout-icon {
   font-size: 18px;
+  color: white;
 }
 
 .logout-text {
