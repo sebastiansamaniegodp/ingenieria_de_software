@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { RegisterComponent } from './auth/register/register.component';
 import { LoginComponent } from './auth/login/login.component';
+import { LayoutComponent } from './shared/layout/layout.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PatientsListComponent } from './patients/patients-list/patients-list.component';
 import { PatientFormComponent } from './patients/patient-form/patient-form.component';
@@ -11,13 +12,20 @@ import { authGuard } from './auth/auth.guard';
 export const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [authGuard] },
-  { path: 'patients', component: PatientsListComponent, canActivate: [authGuard] },
-  { path: 'patients/new', component: PatientFormComponent, canActivate: [authGuard] },
-  { path: 'patients/edit/:id', component: PatientFormComponent, canActivate: [authGuard] },
-  { path: 'appointments', component: AppointmentsListComponent, canActivate: [authGuard] },
-  { path: 'appointments/new', component: AppointmentFormComponent, canActivate: [authGuard] },
-  { path: 'appointments/edit/:id', component: AppointmentFormComponent, canActivate: [authGuard] },
-  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+  {
+    path: '',
+    component: LayoutComponent,
+    canActivate: [authGuard],
+    children: [
+      { path: 'dashboard', component: DashboardComponent },
+      { path: 'patients', component: PatientsListComponent },
+      { path: 'patients/new', component: PatientFormComponent },
+      { path: 'patients/edit/:id', component: PatientFormComponent },
+      { path: 'appointments', component: AppointmentsListComponent },
+      { path: 'appointments/new', component: AppointmentFormComponent },
+      { path: 'appointments/edit/:id', component: AppointmentFormComponent },
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
+    ]
+  },
   { path: '**', redirectTo: 'dashboard' }
 ];

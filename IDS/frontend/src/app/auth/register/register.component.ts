@@ -21,7 +21,10 @@ export class RegisterComponent {
     password: ['', [Validators.required, Validators.minLength(8)]],
     first_name: [''],
     last_name: [''],
-    role: ['PATIENT']
+    role: ['PATIENT'],
+    specialty: [''],
+    medical_license: [''],
+    work_schedule: [null]
   });
 
   roles = [
@@ -31,7 +34,47 @@ export class RegisterComponent {
     { value: 'STAFF', label: 'Personal' }
   ];
 
-  constructor(private fb: FormBuilder, private auth: AuthService, private router: Router) {}
+  specialties = [
+    { value: 'CARDIOLOGY', label: 'Cardiología' },
+    { value: 'DERMATOLOGY', label: 'Dermatología' },
+    { value: 'PEDIATRICS', label: 'Pediatría' },
+    { value: 'NEUROLOGY', label: 'Neurología' },
+    { value: 'ORTHOPEDICS', label: 'Ortopedia' },
+    { value: 'GYNECOLOGY', label: 'Ginecología' },
+    { value: 'PSYCHIATRY', label: 'Psiquiatría' },
+    { value: 'GENERAL', label: 'Medicina General' },
+    { value: 'SURGERY', label: 'Cirugía' },
+    { value: 'EMERGENCY', label: 'Emergencias' }
+  ];
+
+  constructor(private fb: FormBuilder, private auth: AuthService, private router: Router) {
+    // Escuchar cambios en el campo role para actualizar validaciones
+    this.form.get('role')?.valueChanges.subscribe(role => {
+      this.updateDoctorFieldsValidation(role);
+    });
+  }
+
+  updateDoctorFieldsValidation(role: string | null) {
+    const specialtyControl = this.form.get('specialty');
+    const licenseControl = this.form.get('medical_license');
+
+    if (role === 'DOCTOR') {
+      specialtyControl?.setValidators([Validators.required]);
+      licenseControl?.setValidators([Validators.required]);
+    } else {
+      specialtyControl?.clearValidators();
+      licenseControl?.clearValidators();
+      specialtyControl?.setValue('');
+      licenseControl?.setValue('');
+    }
+
+    specialtyControl?.updateValueAndValidity();
+    licenseControl?.updateValueAndValidity();
+  }
+
+  get isDoctor(): boolean {
+    return this.form.get('role')?.value === 'DOCTOR';
+  }
 
   async submit() {
     this.successMsg = '';

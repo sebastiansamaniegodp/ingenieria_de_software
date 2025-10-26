@@ -8,7 +8,7 @@
   animation: fadeIn 0.6s ease-out;
 }
 
-/* Card principal con elevación */
+/* Card principal con elevaciï¿½n */
 .register-card {
   background: var(--card-bg);
   border-radius: var(--border-radius);
@@ -121,7 +121,7 @@
   color: var(--accent-color);
 }
 
-/* Select específico */
+/* Select especï¿½fico */
 .input-wrapper select {
   cursor: pointer;
   appearance: none;
@@ -172,7 +172,7 @@
   font-weight: 500;
 }
 
-/* Mensaje de éxito */
+/* Mensaje de ï¿½xito */
 .success-message {
   display: flex;
   align-items: center;
@@ -196,7 +196,7 @@
   font-weight: 500;
 }
 
-/* Botón principal */
+/* Botï¿½n principal */
 .btn-primary {
   width: 100%;
   padding: 1rem 1.5rem;
@@ -332,4 +332,41 @@
   50% {
     transform: scale(1.05);
   }
+}
+
+/* Doctor Fields */
+.doctor-fields {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-top: 1rem;
+  border-left: 3px solid #667eea;
+  animation: slideDown 0.3s ease-in;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.info-note {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #e3f2fd;
+  color: #1976d2;
+  padding: 0.75rem;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+}
+
+.info-note svg {
+  flex-shrink: 0;
 }

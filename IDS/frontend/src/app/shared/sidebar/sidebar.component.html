@@ -1,0 +1,86 @@
+<aside [class.collapsed]="isCollapsed" class="sidebar">
+  <!-- Toggle Button -->
+  <button class="toggle-btn" (click)="toggleSidebar()" title="Toggle Menu">
+    <span class="toggle-icon">{{ isCollapsed ? '☰' : '✕' }}</span>
+  </button>
+
+  <!-- Logo and Brand -->
+  <div class="sidebar-header">
+    <a routerLink="/dashboard" class="brand-link">
+      <span class="brand-icon">🏥</span>
+      <span class="brand-text" *ngIf="!isCollapsed">Hospital System</span>
+    </a>
+  </div>
+
+  <!-- Navigation Menu -->
+  <nav class="sidebar-nav">
+    <ul class="nav-list">
+      <!-- Dashboard -->
+      <li class="nav-item">
+        <a routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link" [title]="isCollapsed ? 'Dashboard' : ''">
+          <span class="nav-icon">📊</span>
+          <span class="nav-text" *ngIf="!isCollapsed">Dashboard</span>
+        </a>
+      </li>
+
+      <!-- Management Section (Only for ADMIN) -->
+      <li class="nav-item" *ngIf="canAccessManagement()">
+        <div class="nav-section-title" *ngIf="!isCollapsed">
+          <span class="section-icon">⚙️</span>
+          <span class="section-text">Gestión</span>
+        </div>
+
+        <!-- Patients -->
+        <a routerLink="/patients" routerLinkActive="active" class="nav-link nav-sublink" [title]="isCollapsed ? 'Pacientes' : ''">
+          <span class="nav-icon">👥</span>
+          <span class="nav-text" *ngIf="!isCollapsed">Pacientes</span>
+        </a>
+
+        <!-- User Registration -->
+        <a routerLink="/register" routerLinkActive="active" class="nav-link nav-sublink" [title]="isCollapsed ? 'Registrar Usuario' : ''">
+          <span class="nav-icon">👤➕</span>
+          <span class="nav-text" *ngIf="!isCollapsed">Registrar Usuario</span>
+        </a>
+      </li>
+
+      <!-- Patients (for non-admin users) -->
+      <li class="nav-item" *ngIf="canAccessPatients() && !canAccessManagement()">
+        <a routerLink="/patients" routerLinkActive="active" class="nav-link" [title]="isCollapsed ? 'Pacientes' : ''">
+          <span class="nav-icon">👥</span>
+          <span class="nav-text" *ngIf="!isCollapsed">Pacientes</span>
+        </a>
+      </li>
+
+      <!-- Appointments -->
+      <li class="nav-item" *ngIf="canAccessAppointments()">
+        <a routerLink="/appointments" routerLinkActive="active" class="nav-link" [title]="isCollapsed ? 'Citas' : ''">
+          <span class="nav-icon">📅</span>
+          <span class="nav-text" *ngIf="!isCollapsed">Citas</span>
+        </a>
+      </li>
+
+      <!-- Medical Records -->
+      <li class="nav-item" *ngIf="canAccessMedicalRecords()">
+        <a routerLink="/medical-records" routerLinkActive="active" class="nav-link" [title]="isCollapsed ? 'Registros Médicos' : ''">
+          <span class="nav-icon">📋</span>
+          <span class="nav-text" *ngIf="!isCollapsed">Registros Médicos</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- User Section at Bottom -->
+  <div class="sidebar-footer">
+    <div class="user-info">
+      <span class="user-icon">👤</span>
+      <div class="user-details" *ngIf="!isCollapsed">
+        <span class="user-name">{{ userName }}</span>
+        <span class="user-role">{{ roleLabel }}</span>
+      </div>
+    </div>
+    <button class="logout-btn" (click)="logout()" [title]="isCollapsed ? 'Cerrar sesión' : ''">
+      <span class="logout-icon">🚪</span>
+      <span class="logout-text" *ngIf="!isCollapsed">Salir</span>
+    </button>
+  </div>
+</aside>

@@ -1,0 +1,283 @@
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 260px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  transition: width 0.3s ease-in-out;
+  z-index: 1000;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.sidebar.collapsed {
+  width: 70px;
+}
+
+/* Toggle Button */
+.toggle-btn {
+  position: absolute;
+  right: 10px;
+  top: 15px;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  z-index: 10;
+}
+
+.toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.05);
+}
+
+.toggle-icon {
+  font-size: 20px;
+}
+
+/* Header / Brand */
+.sidebar-header {
+  padding: 20px 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.brand-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: white;
+  transition: opacity 0.2s;
+}
+
+.brand-link:hover {
+  opacity: 0.8;
+}
+
+.brand-icon {
+  font-size: 32px;
+  min-width: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.brand-text {
+  font-size: 18px;
+  font-weight: 600;
+  white-space: nowrap;
+  opacity: 1;
+  transition: opacity 0.3s;
+}
+
+.sidebar.collapsed .brand-text {
+  opacity: 0;
+  width: 0;
+}
+
+/* Navigation */
+.sidebar-nav {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 10px 0;
+}
+
+.sidebar-nav::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar-nav::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+}
+
+.nav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-item {
+  margin: 4px 0;
+}
+
+/* Section Title */
+.nav-section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px 8px 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 8px;
+}
+
+.section-icon {
+  font-size: 14px;
+}
+
+/* Navigation Links */
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  transition: all 0.2s;
+  cursor: pointer;
+  position: relative;
+}
+
+.nav-link:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.nav-link.active {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  font-weight: 500;
+}
+
+.nav-link.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 4px;
+  background: white;
+}
+
+.nav-sublink {
+  padding-left: 35px;
+  font-size: 14px;
+}
+
+.sidebar.collapsed .nav-sublink {
+  padding-left: 20px;
+}
+
+.nav-icon {
+  font-size: 20px;
+  min-width: 24px;
+  display: flex;
+  justify-content: center;
+}
+
+.nav-text {
+  white-space: nowrap;
+  opacity: 1;
+  transition: opacity 0.3s;
+}
+
+.sidebar.collapsed .nav-text,
+.sidebar.collapsed .section-text {
+  opacity: 0;
+  width: 0;
+}
+
+/* Footer / User Section */
+.sidebar-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 15px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.user-icon {
+  font-size: 24px;
+  min-width: 28px;
+  display: flex;
+  justify-content: center;
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  overflow: hidden;
+}
+
+.user-name {
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.user-role {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+  white-space: nowrap;
+}
+
+.logout-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.logout-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
+}
+
+.logout-icon {
+  font-size: 18px;
+}
+
+.logout-text {
+  white-space: nowrap;
+}
+
+.sidebar.collapsed .logout-text {
+  display: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .sidebar:not(.collapsed) {
+    width: 100%;
+    max-width: 260px;
+  }
+
+  .sidebar.collapsed {
+    width: 0;
+  }
+}

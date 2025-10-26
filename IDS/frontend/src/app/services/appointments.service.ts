@@ -41,6 +41,7 @@ export class AppointmentsService {
   }
 
   getDoctors(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.authUrl}?role=DOCTOR`);
+    // El endpoint correcto es /api/auth/users/ con filtro role=DOCTOR
+    return this.http.get<any[]>(`${this.authUrl}?role=DOCTOR&is_active=true`);
   }
 }

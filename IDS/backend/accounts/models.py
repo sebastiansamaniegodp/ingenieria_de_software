@@ -32,6 +32,18 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 		STAFF = 'STAFF', 'Personal'
 		PATIENT = 'PATIENT', 'Paciente'
 
+	class Specialties(models.TextChoices):
+		CARDIOLOGY = 'CARDIOLOGY', 'Cardiología'
+		DERMATOLOGY = 'DERMATOLOGY', 'Dermatología'
+		PEDIATRICS = 'PEDIATRICS', 'Pediatría'
+		NEUROLOGY = 'NEUROLOGY', 'Neurología'
+		ORTHOPEDICS = 'ORTHOPEDICS', 'Ortopedia'
+		GYNECOLOGY = 'GYNECOLOGY', 'Ginecología'
+		PSYCHIATRY = 'PSYCHIATRY', 'Psiquiatría'
+		GENERAL = 'GENERAL', 'Medicina General'
+		SURGERY = 'SURGERY', 'Cirugía'
+		EMERGENCY = 'EMERGENCY', 'Emergencias'
+
 	email = models.EmailField(unique=True, max_length=255)
 	first_name = models.CharField(max_length=100, blank=True)
 	last_name = models.CharField(max_length=100, blank=True)
@@ -39,6 +51,11 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 	is_active = models.BooleanField(default=True)
 	is_staff = models.BooleanField(default=False)
 	date_joined = models.DateTimeField(default=timezone.now)
+
+	# Campos específicos para doctores
+	specialty = models.CharField(max_length=50, choices=Specialties.choices, null=True, blank=True)
+	medical_license = models.CharField(max_length=50, unique=True, null=True, blank=True)
+	work_schedule = models.JSONField(null=True, blank=True, help_text='Horario de trabajo en formato JSON')
 
 	USERNAME_FIELD = 'email'
 	REQUIRED_FIELDS = []

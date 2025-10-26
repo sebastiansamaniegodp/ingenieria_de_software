@@ -1,7 +1,4 @@
 <div class="dashboard-container">
-  <!-- Navigation Bar -->
-  <app-navbar></app-navbar>
-
   <!-- Dashboard Content by Role -->
   <main class="dashboard-main" *ngIf="user; else guest">
     <app-patient-dashboard *ngIf="userRole === 'PATIENT'"></app-patient-dashboard>

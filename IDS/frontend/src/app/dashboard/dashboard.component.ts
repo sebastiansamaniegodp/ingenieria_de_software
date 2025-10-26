@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { NavbarComponent } from '../shared/navbar/navbar.component';
 import { PatientDashboardComponent } from './patient-dashboard/patient-dashboard.component';
 import { DoctorDashboardComponent } from './doctor-dashboard/doctor-dashboard.component';
 import { NurseDashboardComponent } from './nurse-dashboard/nurse-dashboard.component';
@@ -13,7 +12,6 @@ import { StaffDashboardComponent } from './staff-dashboard/staff-dashboard.compo
   standalone: true,
   imports: [
     CommonModule,
-    NavbarComponent,
     PatientDashboardComponent,
     DoctorDashboardComponent,
     NurseDashboardComponent,
