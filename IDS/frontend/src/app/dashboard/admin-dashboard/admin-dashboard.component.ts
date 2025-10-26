@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DataTableComponent, TableColumn } from '../../shared/data-table/data-table.component';
+import { ChartComponent } from '../../shared/chart/chart.component';
 import { DashboardService } from '../../services/dashboard.service';
 import { DashboardStats, Appointment, Patient, Task } from '../../models';
 
 @Component({
   selector: 'app-admin-dashboard',
   standalone: true,
-  imports: [CommonModule, DataTableComponent],
+  imports: [CommonModule, DataTableComponent, ChartComponent],
   templateUrl: './admin-dashboard.component.html',
   styleUrl: './admin-dashboard.component.css'
 })
@@ -20,6 +21,12 @@ export class AdminDashboardComponent implements OnInit {
   loadingAppointments = true;
   loadingPatients = true;
   loadingTasks = true;
+  loadingCharts = true;
+
+  // Chart data
+  appointmentsTrendData: any;
+  appointmentsByTypeData: any;
+  appointmentsByStatusData: any;
 
   appointmentColumns: TableColumn[] = [
     { key: 'date', label: 'Fecha', sortable: true },
@@ -61,6 +68,7 @@ export class AdminDashboardComponent implements OnInit {
     this.loadRecentAppointments();
     this.loadRecentPatients();
     this.loadSystemTasks();
+    this.loadChartData();
   }
 
   loadStats() {
@@ -156,5 +164,78 @@ export class AdminDashboardComponent implements OnInit {
   onTaskClick(task: Task) {
     console.log('Task clicked:', task);
     // TODO: Navigate to task management
+  }
+
+  loadChartData() {
+    this.loadingCharts = true;
+    this.dashboardService.getAppointmentChartData().subscribe({
+      next: (data) => {
+        // Trend chart (line chart)
+        this.appointmentsTrendData = {
+          labels: data.by_date.map((d: any) => {
+            const date = new Date(d.date);
+            return date.toLocaleDateString('es-ES', { month: 'short', day: 'numeric' });
+          }),
+          datasets: [{
+            label: 'Citas por Día',
+            data: data.by_date.map((d: any) => d.count),
+            borderColor: '#4F46E5',
+            backgroundColor: 'rgba(79, 70, 229, 0.1)',
+            tension: 0.4,
+            fill: true
+          }]
+        };
+
+        // By type chart (pie chart)
+        const typeLabels: { [key: string]: string } = {
+          'consultation': 'Consulta',
+          'followup': 'Seguimiento',
+          'emergency': 'Emergencia',
+          'surgery': 'Cirugía',
+          'therapy': 'Terapia'
+        };
+
+        this.appointmentsByTypeData = {
+          labels: data.by_type.map((d: any) => typeLabels[d.appointment_type] || d.appointment_type),
+          datasets: [{
+            data: data.by_type.map((d: any) => d.count),
+            backgroundColor: [
+              '#4F46E5',
+              '#10B981',
+              '#F59E0B',
+              '#EF4444',
+              '#8B5CF6'
+            ]
+          }]
+        };
+
+        // By status chart (doughnut chart)
+        const statusLabels: { [key: string]: string } = {
+          'scheduled': 'Programada',
+          'in_progress': 'En Curso',
+          'completed': 'Completada',
+          'cancelled': 'Cancelada'
+        };
+
+        this.appointmentsByStatusData = {
+          labels: data.by_status.map((d: any) => statusLabels[d.status] || d.status),
+          datasets: [{
+            data: data.by_status.map((d: any) => d.count),
+            backgroundColor: [
+              '#3B82F6',
+              '#F59E0B',
+              '#10B981',
+              '#EF4444'
+            ]
+          }]
+        };
+
+        this.loadingCharts = false;
+      },
+      error: (err) => {
+        console.error('Error loading chart data:', err);
+        this.loadingCharts = false;
+      }
+    });
   }
 }

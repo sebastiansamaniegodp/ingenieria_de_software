@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, of, delay } from 'rxjs';
 import {
   Appointment,
@@ -14,71 +15,46 @@ import {
   providedIn: 'root'
 })
 export class DashboardService {
-  // Base URL for future API integration
+  // Base URL for API integration
   private apiUrl = 'http://localhost:8000/api';
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
   // ============ APPOINTMENTS ============
   getAppointments(role?: string, userId?: number): Observable<Appointment[]> {
-    // TODO: Replace with actual API call
-    // return this.http.get<Appointment[]>(`${this.apiUrl}/appointments/`);
+    let params = new HttpParams();
+    if (role) params = params.set('role', role);
+    if (userId) params = params.set('user_id', userId.toString());
 
-    const mockAppointments: Appointment[] = [
-      { id: 1, patient: 1, patient_name: 'Juan Pérez', doctor: 1, doctor_name: 'Dra. García', date: '2025-10-19', time: '09:00', appointment_type: 'consultation', status: 'scheduled', room: 'Consultorio 1' },
-      { id: 2, patient: 2, patient_name: 'María López', doctor: 2, doctor_name: 'Dr. Martínez', date: '2025-10-19', time: '10:30', appointment_type: 'followup', status: 'in_progress', room: 'Consultorio 2' },
-      { id: 3, patient: 3, patient_name: 'Carlos Rodríguez', doctor: 3, doctor_name: 'Dra. Fernández', date: '2025-10-19', time: '11:00', appointment_type: 'emergency', status: 'scheduled', room: 'Emergencia' },
-      { id: 4, patient: 4, patient_name: 'Ana Martín', doctor: 4, doctor_name: 'Dr. Sánchez', date: '2025-10-20', time: '14:00', appointment_type: 'followup', status: 'scheduled', room: 'Consultorio 3' },
-      { id: 5, patient: 5, patient_name: 'Pedro González', doctor: 1, doctor_name: 'Dra. García', date: '2025-10-21', time: '09:30', appointment_type: 'consultation', status: 'scheduled', room: 'Consultorio 1' }
-    ];
-
-    return of(mockAppointments).pipe(delay(300)); // Simulate network delay
+    return this.http.get<Appointment[]>(`${this.apiUrl}/appointments/`, { params });
   }
 
   getTodayAppointments(): Observable<Appointment[]> {
-    // TODO: Replace with actual API call
-    // return this.http.get<Appointment[]>(`${this.apiUrl}/appointments/today/`);
-
     const today = new Date().toISOString().split('T')[0];
-    const mockAppointments: Appointment[] = [
-      { id: 1, patient: 1, patient_name: 'Juan Pérez', doctor: 1, doctor_name: 'Dra. García', date: today, time: '09:00', appointment_type: 'consultation', status: 'scheduled', room: 'Consultorio 1' },
-      { id: 2, patient: 2, patient_name: 'María López', doctor: 2, doctor_name: 'Dr. Martínez', date: today, time: '10:30', appointment_type: 'followup', status: 'in_progress', room: 'Consultorio 2' },
-      { id: 3, patient: 3, patient_name: 'Carlos Rodríguez', doctor: 3, doctor_name: 'Dra. Fernández', date: today, time: '11:00', appointment_type: 'emergency', status: 'scheduled', room: 'Emergencia' }
-    ];
+    const params = new HttpParams().set('date', today);
 
-    return of(mockAppointments).pipe(delay(300));
+    return this.http.get<Appointment[]>(`${this.apiUrl}/appointments/`, { params });
   }
 
   // ============ PATIENTS ============
   getPatients(limit?: number): Observable<Patient[]> {
-    // TODO: Replace with actual API call
-    // return this.http.get<Patient[]>(`${this.apiUrl}/patients/`);
+    let params = new HttpParams();
+    if (limit) {
+      // Note: Django REST Framework doesn't have a built-in limit parameter,
+      // so we'll fetch all and slice on the frontend for now
+      // TODO: Add pagination support on backend
+    }
 
-    const mockPatients: Patient[] = [
-      { id: 1, first_name: 'Juan', last_name: 'Pérez', email: 'juan@example.com', age: 45, gender: 'M', blood_type: 'O+', phone: '555-0101', last_visit: '2025-10-15', status: 'active' },
-      { id: 2, first_name: 'María', last_name: 'López', email: 'maria@example.com', age: 32, gender: 'F', blood_type: 'A+', phone: '555-0102', last_visit: '2025-10-18', status: 'active' },
-      { id: 3, first_name: 'Carlos', last_name: 'Rodríguez', email: 'carlos@example.com', age: 28, gender: 'M', blood_type: 'B+', phone: '555-0103', last_visit: '2025-10-10', status: 'active' },
-      { id: 4, first_name: 'Ana', last_name: 'Martín', email: 'ana@example.com', age: 51, gender: 'F', blood_type: 'AB+', phone: '555-0104', last_visit: '2025-10-12', status: 'active' },
-      { id: 5, first_name: 'Pedro', last_name: 'González', email: 'pedro@example.com', age: 39, gender: 'M', blood_type: 'O-', phone: '555-0105', last_visit: '2025-10-14', status: 'active' }
-    ];
-
-    const result = limit ? mockPatients.slice(0, limit) : mockPatients;
-    return of(result).pipe(delay(300));
+    return this.http.get<Patient[]>(`${this.apiUrl}/patients/`, { params });
   }
 
   // ============ MEDICAL RECORDS ============
   getMedicalRecords(patientId?: number, type?: string): Observable<MedicalRecord[]> {
-    // TODO: Replace with actual API call
-    // return this.http.get<MedicalRecord[]>(`${this.apiUrl}/medical-records/`);
+    let params = new HttpParams();
+    if (patientId) params = params.set('patient', patientId.toString());
+    if (type) params = params.set('type', type);
 
-    const mockRecords: MedicalRecord[] = [
-      { id: 1, patient_id: 1, patient_name: 'Juan Pérez', date: '2025-10-18', type: 'lab_result', title: 'Análisis de Sangre', description: 'Hemograma completo - Resultados normales', doctor_name: 'Dra. García', status: 'completed' },
-      { id: 2, patient_id: 1, patient_name: 'Juan Pérez', date: '2025-10-15', type: 'prescription', title: 'Receta Médica', description: 'Ibuprofeno 400mg - 1 cada 8 horas', doctor_name: 'Dr. Martínez', status: 'completed' },
-      { id: 3, patient_id: 2, patient_name: 'María López', date: '2025-10-17', type: 'diagnosis', title: 'Diagnóstico', description: 'Hipertensión arterial leve', doctor_name: 'Dr. Sánchez', status: 'reviewed' },
-      { id: 4, patient_id: 3, patient_name: 'Carlos Rodríguez', date: '2025-10-16', type: 'lab_result', title: 'Radiografía de Tórax', description: 'Sin hallazgos patológicos', doctor_name: 'Dra. Fernández', status: 'pending' }
-    ];
-
-    return of(mockRecords).pipe(delay(300));
+    return this.http.get<MedicalRecord[]>(`${this.apiUrl}/medical-records/`, { params });
   }
 
   // ============ TASKS ============
@@ -113,20 +89,12 @@ export class DashboardService {
 
   // ============ STATS ============
   getDashboardStats(role?: string): Observable<DashboardStats> {
-    // TODO: Replace with actual API call
-    // return this.http.get<DashboardStats>(`${this.apiUrl}/stats/`);
+    return this.http.get<DashboardStats>(`${this.apiUrl}/auth/dashboard/stats/`);
+  }
 
-    const mockStats: DashboardStats = {
-      total_patients: 248,
-      total_appointments: 87,
-      appointments_today: 12,
-      active_staff: 45,
-      bed_occupancy: 78,
-      pending_tasks: 15,
-      unread_notifications: 3
-    };
-
-    return of(mockStats).pipe(delay(300));
+  // ============ CHART DATA ============
+  getAppointmentChartData(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/appointments/chart_data/`);
   }
 
   // ============ VITAL SIGNS ============
@@ -143,20 +111,4 @@ export class DashboardService {
     return of(mockVitalSigns).pipe(delay(300));
   }
 
-  // ============ HELPER METHODS FOR FUTURE API INTEGRATION ============
-
-  // Example of how to migrate to real API calls:
-  /*
-  import { HttpClient } from '@angular/common/http';
-
-  constructor(private http: HttpClient) {}
-
-  getAppointments(role?: string, userId?: number): Observable<Appointment[]> {
-    let params = new HttpParams();
-    if (role) params = params.set('role', role);
-    if (userId) params = params.set('user_id', userId.toString());
-
-    return this.http.get<Appointment[]>(`${this.apiUrl}/appointments/`, { params });
-  }
-  */
 }

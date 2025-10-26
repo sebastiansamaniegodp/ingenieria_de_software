@@ -39,6 +39,32 @@
     </div>
   </div>
 
+  <!-- Charts Section -->
+  <section class="charts-section" *ngIf="!loadingCharts">
+    <h3 class="section-title">Análisis de Consultas</h3>
+    <div class="charts-grid">
+      <div class="chart-item">
+        <app-chart
+          *ngIf="appointmentsTrendData"
+          [type]="'line'"
+          [data]="appointmentsTrendData"
+          [height]="300"
+          title="Tendencia de Mis Citas (Últimos 7 Días)">
+        </app-chart>
+      </div>
+
+      <div class="chart-item">
+        <app-chart
+          *ngIf="appointmentsByTypeData"
+          [type]="'doughnut'"
+          [data]="appointmentsByTypeData"
+          [height]="300"
+          title="Distribución por Tipo de Consulta">
+        </app-chart>
+      </div>
+    </div>
+  </section>
+
   <div class="dashboard-content">
     <!-- Today's Appointments -->
     <section class="dashboard-section priority">

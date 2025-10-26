@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DataTableComponent, TableColumn } from '../../shared/data-table/data-table.component';
+import { ChartComponent } from '../../shared/chart/chart.component';
 import { DashboardService } from '../../services/dashboard.service';
 import { Appointment, Patient, DashboardStats } from '../../models';
 
 @Component({
   selector: 'app-doctor-dashboard',
   standalone: true,
-  imports: [CommonModule, DataTableComponent],
+  imports: [CommonModule, DataTableComponent, ChartComponent],
   templateUrl: './doctor-dashboard.component.html',
   styleUrl: './doctor-dashboard.component.css'
 })
@@ -18,6 +19,11 @@ export class DoctorDashboardComponent implements OnInit {
   loadingAppointments = true;
   loadingPatients = true;
   loadingStats = true;
+  loadingCharts = true;
+
+  // Chart data
+  appointmentsTrendData: any;
+  appointmentsByTypeData: any;
 
   appointmentColumns: TableColumn[] = [
     { key: 'time', label: 'Hora', sortable: true },
@@ -52,6 +58,7 @@ export class DoctorDashboardComponent implements OnInit {
     this.loadTodayAppointments();
     this.loadRecentPatients();
     this.loadStats();
+    this.loadChartData();
   }
 
   loadTodayAppointments() {
@@ -126,5 +133,57 @@ export class DoctorDashboardComponent implements OnInit {
   onPatientClick(patient: Patient) {
     console.log('Patient clicked:', patient);
     // TODO: Navigate to patient medical history
+  }
+
+  loadChartData() {
+    this.loadingCharts = true;
+    this.dashboardService.getAppointmentChartData().subscribe({
+      next: (data) => {
+        // Trend chart (line chart)
+        this.appointmentsTrendData = {
+          labels: data.by_date.map((d: any) => {
+            const date = new Date(d.date);
+            return date.toLocaleDateString('es-ES', { month: 'short', day: 'numeric' });
+          }),
+          datasets: [{
+            label: 'Mis Citas por Día',
+            data: data.by_date.map((d: any) => d.count),
+            borderColor: '#10B981',
+            backgroundColor: 'rgba(16, 185, 129, 0.1)',
+            tension: 0.4,
+            fill: true
+          }]
+        };
+
+        // By type chart (doughnut)
+        const typeLabels: { [key: string]: string } = {
+          'consultation': 'Consulta',
+          'followup': 'Seguimiento',
+          'emergency': 'Emergencia',
+          'surgery': 'Cirugía',
+          'therapy': 'Terapia'
+        };
+
+        this.appointmentsByTypeData = {
+          labels: data.by_type.map((d: any) => typeLabels[d.appointment_type] || d.appointment_type),
+          datasets: [{
+            data: data.by_type.map((d: any) => d.count),
+            backgroundColor: [
+              '#10B981',
+              '#3B82F6',
+              '#F59E0B',
+              '#EF4444',
+              '#8B5CF6'
+            ]
+          }]
+        };
+
+        this.loadingCharts = false;
+      },
+      error: (err) => {
+        console.error('Error loading chart data:', err);
+        this.loadingCharts = false;
+      }
+    });
   }
 }

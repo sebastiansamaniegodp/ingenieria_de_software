@@ -76,6 +76,42 @@
     </div>
   </div>
 
+  <!-- Charts Section -->
+  <section class="charts-section" *ngIf="!loadingCharts">
+    <h3 class="section-title">Análisis y Tendencias</h3>
+    <div class="charts-grid">
+      <div class="chart-item">
+        <app-chart
+          *ngIf="appointmentsTrendData"
+          [type]="'line'"
+          [data]="appointmentsTrendData"
+          [height]="300"
+          title="Tendencia de Citas (Últimos 7 Días)">
+        </app-chart>
+      </div>
+
+      <div class="chart-item">
+        <app-chart
+          *ngIf="appointmentsByTypeData"
+          [type]="'pie'"
+          [data]="appointmentsByTypeData"
+          [height]="300"
+          title="Citas por Tipo">
+        </app-chart>
+      </div>
+
+      <div class="chart-item">
+        <app-chart
+          *ngIf="appointmentsByStatusData"
+          [type]="'doughnut'"
+          [data]="appointmentsByStatusData"
+          [height]="300"
+          title="Citas por Estado">
+        </app-chart>
+      </div>
+    </div>
+  </section>
+
   <div class="dashboard-content">
     <!-- Today's Appointments -->
     <section class="dashboard-section">

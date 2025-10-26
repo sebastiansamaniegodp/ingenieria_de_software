@@ -130,6 +130,30 @@
   margin: 0.25rem 0 0 0;
 }
 
+/* Charts Section */
+.charts-section {
+  margin-bottom: 2rem;
+}
+
+.section-title {
+  color: #2c3e50;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 1.5rem 0;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid #ecf0f1;
+}
+
+.charts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 1.5rem;
+}
+
+.chart-item {
+  min-height: 350px;
+}
+
 /* Dashboard Content */
 .dashboard-content {
   display: flex;
