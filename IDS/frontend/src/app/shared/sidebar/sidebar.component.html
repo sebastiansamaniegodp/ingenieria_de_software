@@ -59,6 +59,14 @@
         </a>
       </li>
 
+      <!-- Tasks -->
+      <li class="nav-item" *ngIf="canAccessTasks()">
+        <a routerLink="/tasks" routerLinkActive="active" class="nav-link" [title]="isCollapsed ? 'Tareas' : ''">
+          <span class="nav-icon">✅</span>
+          <span class="nav-text" *ngIf="!isCollapsed">Tareas</span>
+        </a>
+      </li>
+
       <!-- Medical Records -->
       <li class="nav-item" *ngIf="canAccessMedicalRecords()">
         <a routerLink="/medical-records" routerLinkActive="active" class="nav-link" [title]="isCollapsed ? 'Registros Médicos' : ''">

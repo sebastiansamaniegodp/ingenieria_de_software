@@ -7,6 +7,7 @@ import { PatientsListComponent } from './patients/patients-list/patients-list.co
 import { PatientFormComponent } from './patients/patient-form/patient-form.component';
 import { AppointmentsListComponent } from './appointments/appointments-list/appointments-list.component';
 import { AppointmentFormComponent } from './appointments/appointment-form/appointment-form.component';
+import { TaskManagementComponent } from './features/task-management/task-management.component';
 import { authGuard } from './auth/auth.guard';
 
 export const routes: Routes = [
@@ -24,6 +25,7 @@ export const routes: Routes = [
       { path: 'appointments', component: AppointmentsListComponent },
       { path: 'appointments/new', component: AppointmentFormComponent },
       { path: 'appointments/edit/:id', component: AppointmentFormComponent },
+      { path: 'tasks', component: TaskManagementComponent },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
     ]
   },

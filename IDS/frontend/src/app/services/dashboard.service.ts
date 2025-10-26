@@ -65,6 +65,23 @@ export class DashboardService {
     return this.http.get<Task[]>(`${this.apiUrl}/tasks/`, { params });
   }
 
+  createTask(task: Partial<Task>): Observable<Task> {
+    return this.http.post<Task>(`${this.apiUrl}/tasks/`, task);
+  }
+
+  updateTask(id: number, task: Partial<Task>): Observable<Task> {
+    return this.http.put<Task>(`${this.apiUrl}/tasks/${id}/`, task);
+  }
+
+  deleteTask(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/tasks/${id}/`);
+  }
+
+  getStaffUsers(): Observable<any[]> {
+    // Obtener todos los usuarios y filtrar solo staff/nurse/admin
+    return this.http.get<any[]>(`${this.apiUrl}/auth/users/`);
+  }
+
   // ============ NOTIFICATIONS ============
   getNotifications(userId?: number): Observable<Notification[]> {
     let params = new HttpParams();

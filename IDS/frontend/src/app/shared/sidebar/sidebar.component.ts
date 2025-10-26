@@ -65,6 +65,10 @@ export class SidebarComponent implements OnInit {
     return ['ADMIN', 'DOCTOR', 'NURSE'].includes(this.userRole);
   }
 
+  canAccessTasks(): boolean {
+    return ['ADMIN', 'STAFF', 'NURSE'].includes(this.userRole);
+  }
+
   canAccessManagement(): boolean {
     return ['ADMIN'].includes(this.userRole);
   }

@@ -18,6 +18,7 @@ export class StaffDashboardComponent implements OnInit {
   loadingTasks = true;
   loadingNotifications = true;
   loadingAppointments = true;
+  user: any = null;
 
   taskColumns: TableColumn[] = [
     { key: 'title', label: 'Tarea', sortable: true },
@@ -73,7 +74,9 @@ export class StaffDashboardComponent implements OnInit {
     }
   ];
 
-  constructor(private dashboardService: DashboardService) {}
+  constructor(private dashboardService: DashboardService) {
+    this.user = JSON.parse(localStorage.getItem('user') || 'null');
+  }
 
   ngOnInit() {
     this.loadMyTasks();
@@ -83,7 +86,8 @@ export class StaffDashboardComponent implements OnInit {
 
   loadMyTasks() {
     this.loadingTasks = true;
-    this.dashboardService.getTasks().subscribe({
+    const userId = this.user?.id;
+    this.dashboardService.getTasks(userId).subscribe({
       next: (data) => {
         this.myTasks = data;
         this.loadingTasks = false;
