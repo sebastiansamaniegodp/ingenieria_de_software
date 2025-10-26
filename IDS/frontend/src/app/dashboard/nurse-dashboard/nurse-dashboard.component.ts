@@ -186,4 +186,21 @@ export class NurseDashboardComponent implements OnInit {
     console.log('Task clicked:', task);
     // TODO: Update task status or show details
   }
+
+  get monitoredPatientsToday(): number {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const uniquePatientIds = new Set(
+      this.vitalSigns
+        .filter(vital => {
+          const recordedDate = new Date(vital.recorded_at);
+          recordedDate.setHours(0, 0, 0, 0);
+          return recordedDate.getTime() === today.getTime();
+        })
+        .map(vital => vital.patient_id)
+    );
+
+    return uniquePatientIds.size;
+  }
 }
